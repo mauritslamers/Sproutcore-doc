@@ -1,0 +1,18 @@
+====== The DataStore framework ======
+
+The DataStore framework is a framework intended to enable the handling and editing of records inside a Sproutcore application. 
+
+===== Models =====
+
+Models are used to describe records as objects with properties and methods. [[concepts:datastore:models | More...]]
+
+===== The store =====
+
+The store is a central storage module to be used as the in-memory storage of records used by the application. [[concepts:datastore:store | More...]]
+
+===== DataSources =====
+
+The datasource is a module connecting the store to a server backend. [[concepts:datastore:datasource | More...]]
+
+
+

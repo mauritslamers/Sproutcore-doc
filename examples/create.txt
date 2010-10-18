@@ -1,0 +1,15 @@
+=== .create() ===
+
+SC.Object.create takes an object literal and will copy the standard SC.Object properties, methods and mixins on the given object.
+You can also provide mixins, in this case SC.Enumerable.
+
+<code javascript>
+   MyApp.MyNewObject = SC.Object.create(SC.Enumerable,{
+     property: value,
+     anotherProperty: anotherValue,
+     aMethod: function(params){
+       // function body
+       return params;
+     }
+   });
+</code>

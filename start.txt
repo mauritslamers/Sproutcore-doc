@@ -1,0 +1,18 @@
+====== SproutCore ======
+
+Sproutcore is a web application framework especially suited for developing desktop-grade applications.
+
+The following paths are available:
+
+[[tutorials:start | Tutorials ]]\\
+A list of tutorials you can use to start learning the framework
+
+[[concepts:sproutcore:start | Concepts ]]\\
+A list of concepts used in Sproutcore
+
+[[reference:start | Reference ]]\\
+A reference of Sproutcore parts
+
+[[examples:start | Examples ]]\\
+A list of examples
+

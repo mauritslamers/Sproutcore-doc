@@ -1,0 +1,11 @@
+====== Concepts used in Sproutcore =======
+
+In an application development framework there are many concepts a developer has to understand to be able to make the application work as expected. This page tries to list all categories of concepts. 
+
+===== Sproutcore (RunTime) =====
+
+While Sproutcore can be called an application development framework, it actually consists of a few different frameworks, which are all built upon some basic behaviour defined in the Runtime framework. [[concepts:sproutcore:start | More...]]
+
+===== The Data store framework ======
+
+[[concepts:datastore:start | Datastore]]

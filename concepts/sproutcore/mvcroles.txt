@@ -1,0 +1,9 @@
+====== Roles of Models, Views and Controllers ======
+
+The roles of models, views and controllers are quite strict, in the sense that they don't do inter-object communication themselves:
+
+  * Model: A model just describes the layout of data and shouldn't contain functionality that doesn't deal directly with the model itself
+  * View: A view is an object describing how a particular view should look like, and contains functionality to deal with displaying data.
+  * Controller: A controller is an object describing what actions should be taken and contain the main functionality of the application.
+
+These objects communicate mainly through bindings, which explains why they normally only have to deal with internal matters.

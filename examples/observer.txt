@@ -1,0 +1,15 @@
+=== Observer ===
+
+<code javascript>
+myApp.myController = SC.Controller.extend({
+    
+    property: 1,
+    
+    property2: 0,
+    
+    propObs: function(){ 
+       var val = this.get('property'); 
+       this.set('property2',val+1); 
+    }.observes('property')
+}
+</code>

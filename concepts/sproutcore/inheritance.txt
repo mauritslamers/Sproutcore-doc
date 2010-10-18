@@ -1,0 +1,18 @@
+====== Sproutcore MVC inheritance ======
+
+===== Object hierarchy =====
+
+As already said, Sproutcore shares Cocoas MVC implementation model and has a single object every object in the system inherits from.
+In Sproutcore this object is SC.Object. This means that every object inside an SC application inherits from SC.Object.
+
+Directly on top of SC.Object there are a few base objects for different types of elements found in the SC system, including:
+  * SC.View
+  * SC.Record
+  * SC.Controller
+
+These objects define default behaviour for views, models and controllers. All views should inherit from SC.View, all Models from Record and all controllers from SC.Controller in order to work properly inside the Sproutcore system.
+====== Examples ======
+
+<embed examples:create />
+
+<embed examples:extend />

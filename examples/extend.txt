@@ -1,0 +1,16 @@
+=== .extend() ===
+
+
+SC.Object.extend takes an object literal and will integrate the standard SC.Object properties, methods and mixins into a single object prototype (class).
+You can also provide mixins, in this case SC.Enumerable.
+
+<code javascript>
+   MyApp.MyNewObject = SC.Object.extend(SC.Enumerable,{
+     property: value,
+     anotherProperty: anotherValue,
+     aMethod: function(params){
+       // function body
+       return params;
+     }
+   });
+</code>

@@ -1,0 +1,35 @@
+====== Concepts used inside the Sproutcore framework ======
+
+===== MVC: Model-View-Controller =====
+
+Sproutcore is an implementation of the Model-View-Controller development paradigm. In implementing this paradigm, the framework follows the implementation model as used in Cocoa/NeXTStep. Two concepts are of major importance in this model: the inheritance model and the observer/binding pattern.
+
+==== Inheritance model ====
+
+Cocoa is an Object Oriented MVC implementation, in which all objects inherit from a single base object. This base object defines standard behaviour and properties that should be shared by every object in the framework. Sproutcore shares this implementation model. [[inheritance| More... ]]
+
+==== Roles of Model, View and Controller ====
+
+In Cocoa the roles of Models, Views and Controllers can deviate from what you are expecting, in the sense that the divisions are quite strict. [[mvcroles| More... ]]
+
+===== Observer/binding pattern =====
+
+==== Bindings ==== 
+
+To prevent having to write code to update every value in every controller and view, SC uses a binding: a link you define which binds the value from a property on a controller or view to a local property. [[bindings| More ...]]
+
+==== Observers ====
+
+Observers are special type of functions. These functions are executed whenever a property they observe changes value. Observers are intended to be used within objects. [[observers| More... ]]
+
+==== Getters and Setters ====
+
+In order to make bindings and observers work inside JavaScript, Sproutcore uses getters and setters. [[getterssetters| More...]] 
+
+===== Mixins =====
+
+In order to do multiple inheritance without having the hassle to deal with multiple origin changes (which is one of the nastiest parts of OO), SC uses the Mixins concept. [[mixins| More ...]] 
+
+===== RunLoop =====
+
+The RunLoop is a concept to prevent your application having to run constantly, which is not useful in a event based environment. [[runloop| More ...]]

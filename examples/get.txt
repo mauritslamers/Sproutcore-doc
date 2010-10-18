@@ -1,0 +1,18 @@
+=== .get() ===
+
+myObject.get(propertyName) returns the value of the property or computed property on myObject.
+
+<code javascript>
+  var myObject = SC.Object.create({
+    myProp: 1,
+    
+    myComputedProp: function(){
+      var myProp = this.get('myProp');
+      return myProp + 1;
+    }.property()
+  });
+
+
+  var myValue = myObject.get('myProp'); // returns 1
+  var mySecondValue = myObject.get('myComputedProp'); // returns 2
+</code>

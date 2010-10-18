@@ -1,0 +1,13 @@
+====== RunLoop ======
+
+As JavaScript is a event based language, a continuous running JavaScript application wouldn't work well and would need much resources.  The RunLoop wraps the JavaScript (or browser) events and is used to propagate all changes throughout the entire application, and fire all observers and bindings. In a browser the RunLoop is mostly executed after every event supported by the browser, such as mouseover, onclick etc...
+
+==== Advantages of RunLoops ====
+
+  * More consistent timing
+  * Gives you a way to defer execution of some events until the end of the loop or until a later time. This can dramatically improve performance at times
+
+==== Using RunLoops in your own app ====
+  * Always begin and end each event handler with SC.RunLoop.begin() & SC.RunLoop.end()
+  * Use Function.invokeLater() instead of timeouts
+  * Use Function.invokeOnce() to exec updates only once.

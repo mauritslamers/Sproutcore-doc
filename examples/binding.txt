@@ -1,0 +1,15 @@
+=== Binding ===
+
+Appending 'Binding' to the end of a property name in a create or extend call will automatically set up a binding
+<file javascript my_controller.js>
+  MyApp.myController = SC.Controller.create({
+    prop: 1
+  });
+</file>
+<file javascript my_controller_two.js>
+  MyApp.myControllerTwo = SC.Controller.create({
+    propBinding: 'MyApp.myController.prop'
+  });
+
+</file>
+

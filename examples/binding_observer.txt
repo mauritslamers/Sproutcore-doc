@@ -1,0 +1,17 @@
+=== Inter-Object communication ===
+<file javascript my_controller_one.js>
+  MyApp.myControllerOne = SC.Controller.create({
+    prop: 1
+  });
+</file>
+<file javascript my_controller_two.js>
+  MyApp.myControllerTwo = SC.Controller.create({
+  
+    propOnControllerOneBinding: 'MyApp.myControllerOne.prop',
+    
+    propObs: function(){
+      // this will be fired as soon as the value of prop on MyApp.myControllerOne changes
+    }.observes('propOnControllerOne')
+  
+  });
+</file>

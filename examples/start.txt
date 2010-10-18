@@ -1,0 +1,15 @@
+====== Examples ======
+
+[[examples:create | .create() ]]
+
+[[examples:extend | .extend() ]]
+
+[[examples:binding | Bindings ]]
+
+[[examples:binding+observer | Inter-object communication ]]
+
+[[examples:observer | Observer ]]
+
+[[examples:get | .get() ]]
+
+[[examples:set | .set() ]]
