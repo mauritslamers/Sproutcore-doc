@@ -22,3 +22,4 @@
     * [[examples:binding_observer | Inter-object communication]]
     * [[examples:get | Get]]
     * [[examples:set | Set]]
+  * [[glossary:start | Glossary]]
