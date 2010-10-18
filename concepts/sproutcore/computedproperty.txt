@@ -1,0 +1,3 @@
+====== Computed Property ======
+
+A computed property can be considered a special form of an observer. It is a function returning a computed value based on other properties or contextual data.
