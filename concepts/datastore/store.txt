@@ -1,7 +1,21 @@
 ====== The Store ======
 
 The store inside an application should be regarded as the in-memory storage of data the application needs to handle.
-Its role in the application is the source of all data (or records) in the application and it provides ways to perform queries and searches on that data.
+Its role in the application is to be the single source and storage of all record data in the application and it provides ways to perform queries and searches on that data.
+
+
+===== Find =====
+
+Finding records is one of the most used functionalities of the store. 
+
+===== Queries =====
+
+Queries form a special way of finding data in your store as they allow a SQL like approach to searching.
+
+
+
+===== old stuff =====
+ 
 What the store doesn't do is send record instances (objects) around inside the application. This would cause a real management problem as the application then has to track all versions of that record in all parts of the application. Instead, the store sends a reference, a pointer to the record. This reference sometimes looks like an object (materialized), and sometimes it will be an index, the so-called storeKey. The store will keep the original data in its memory as a data hash.
 When a record changes, those changes will be automatically forwarded to the store. The store will store the changes in its datahash of that record and propagate all changes throughout the application, making sure that all parts of the applications that have some kind of reference to that data (for example in query results etc) use the same version of that particular record. This automatic propagation of changes is also the reason you need to create, update, refresh or destroy data using the store as an inbetween.
 

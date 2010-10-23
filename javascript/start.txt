@@ -1,0 +1,28 @@
+====== Javascript ======
+
+Javascript is a peculiar programming language, both in history as in workings. Moreover, its name is a complete mismatch: it has very little inheritance from Java and it is nothing like a script language.
+Javascript is a Object Oriented functional language. As such it has a stronger resemblance to functional languages like Lisp and Scheme than it has to the languages its syntax is borrowed from, like C and Java.
+
+To help you to learn more about this language, we compiled a set of links we think will help you learn about this remarkable programming language.
+
+===== Douglas Crockford =====
+
+[[http://en.wikipedia.org/wiki/Douglas_Crockford | Douglas Crockford]] is one of the most important Javascript language developers around. His lectures on Javascript are therefore almost indispensable. Below is a list of links  including these lectures.
+
+Crockfords writings on Javascript: [[http://javascript.crockford.com/]]
+
+==== Lectures ====
+The Javascript programming language: [[http://video.yahoo.com/watch/111593/1710507]]
+
+Javascript - the good parts: [[http://video.yahoo.com/watch/630959/2974197]]
+
+Advanced Javascript: [[http://video.yahoo.com/watch/111585/1027823]]
+
+Set of lectures: [[http://yuiblog.com/crockford/]]
+
+===== Other sources =====
+
+Javascript in 10 minutes: [[http://javascript.infogami.com/Javascript_in_Ten_Minutes]]
+
+
+

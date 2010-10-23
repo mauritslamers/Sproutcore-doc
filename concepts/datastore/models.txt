@@ -1,1 +1,11 @@
 ====== Models ======
+
+Models are used to describe the layout of the record data you will be receiving from either the back end, or from the fixtures.((see [[concepts:datastore:fixtures | fixtures]]))
+
+Models are classes extending SC.Record. As models are classes, any property you will give a value will have the same value in all instances of these classes. To have a record have normal values and still being able to do a kind of typing, model properties are defined using a special object, called a Record Attribute.
+
+Models also contain properties denoting the relations to other models. The pattern follows the Rails model: properties on the model contain the data the current record has a relation to.
+
+A model property name can be chosen independently from the actual key name as you can set the key name in the Record Attribute settings.
+
+====== Examples ======

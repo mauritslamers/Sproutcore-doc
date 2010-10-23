@@ -1,5 +1,9 @@
 ====== Reference ======
 
+At the moment we are focussing on the concepts and examples.
+
+Please use [[http://docs.sproutcore.com]]  or [[http://wiki.sproutcore.com]] for the moment
+
 [[reference:views:start | Views ]]
 
 [[reference:controllers:start | Controllers ]]

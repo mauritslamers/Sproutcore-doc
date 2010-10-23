@@ -1,1 +1,5 @@
 ====== Tutorials ======
+
+At the moment we are focussing on the concepts and examples.
+
+Please use [[http://wiki.sproutcore.com]] for the moment

@@ -1,18 +1,21 @@
 ====== SproutCore ======
 
-Sproutcore is a web application framework especially suited for developing desktop-grade applications.
+Sproutcore is a web application framework written in Javascript especially suited for developing desktop-grade applications.
 
-The following paths are available:
+For all information in this documentation except the Javascript part it is assumed you are familiar with Javascript. 
 
-[[tutorials:start | Tutorials ]]\\
-A list of tutorials you can use to start learning the framework
+===== Javascript =====
+While the syntax may be familiar to you because it resembles C, Javascript is very unlike C. If you don't know the language well, we therefore strongly recommend you to familiarize yourself with the language first. [[javascript:start | To Javascript]]
 
-[[concepts:sproutcore:start | Concepts ]]\\
-A list of concepts used in Sproutcore
+===== Tutorials =====
+To help you start using the Sproutcore to develop your applications, tutorials are often very useful. [[tutorials:start | To the Tutorials ]]
 
-[[reference:start | Reference ]]\\
-A reference of Sproutcore parts
+===== Concepts =====
+Learning about the concepts used in and by Sproutcore helps you using the framework optimally. [[concepts:sproutcore:start | To the concepts ]]
 
-[[examples:start | Examples ]]\\
-A list of examples
+===== Reference =====
+Often you want to look up specific parts of information about Sproutcore. [[reference:start | To the reference ]]
+
+===== Examples =====
+In this documentation many examples are used. You can also browse these examples directly. [[examples:start | To the  Examples ]]
 

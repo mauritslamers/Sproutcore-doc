@@ -1,0 +1,89 @@
+====== How to do a custom renderer ======
+
+<code>
+devinus: so what you'll want to do is create a folder 'renderers'
+[22:00] devinus: and in it do .e.g media_slider.js
+mauritslamers: the renderers folder is inside the media framework folder?
+[22:01] mauritslamers: to answer my own question: yes 
+[22:02] rklancer left the chat room. (Quit: rklancer)
+[22:02] mauritslamers: done
+[22:03] MiiCode2 joined the chat room.
+[22:03] devinus: mauritslamers: https://gist.github.com/c0b0d38f98e94d2a1ecf
+[22:03] devinus: something like that
+[22:03] robiculous left the chat room. (Quit: robiculous)
+[22:03] devinus: render is called on first render
+[22:04] devinus: update is called when something in displayProperties changes
+[22:04] mauritslamers: ok
+[22:05] devinus: which appears to be when value, minimum, or maximum changes
+[22:05] devinus: then in views/media_slider.js
+[22:05] devinus: ...
+[22:07] devinus: mauritslamers: https://gist.github.com/3447328e9ff7a40aab81
+[22:07] devinus: ta-da
+[22:09] mauritslamers: great... a few questions still: the theme.mediaSlider() call is available because it is defined in the renderer?
+
+[22:22] devinus: mauritslamers: you have to add it to the displayProperties array to make the property trigger an update on the renderer
+[22:22] devinus: mauritslamers: L6 should actually read if (!theme.mediaSlider) return null;
+[22:23] devinus: mauritslamers: it was a bug i experienced while i was developing on quilmes branch, not sure if it's resolved yet
+[22:23] devinus: mauritslamers: may be able to get rid of L6
+devinus: mauritslamers: yeah, you use context.push('<div>', this.someAttrYouPassed, '</div>', ...etc...)
+
+rklancer joined the chat room.
+[22:30] mauritslamers: devinus: where does the context array originate? in the process calling the update? Is the HTML in the update replaced or just updated, or is that something I can decide myself?
+[22:32] volker67 left the chat room. (Ping timeout: 276 seconds)
+[22:33] MiiCode2 left the chat room. (Quit: Back Later!)
+[22:33] devinus: mauritslamers: it's passed to render
+[22:33] mauritslamers: ah great 
+[22:34] mauritslamers: devinus: thanks for your patience so far 
+[22:35] mauritslamers: now really the last question for now: if I do displayProperties: ['someprop'] doesn't that override the properties of the original view?
+[22:38] devinus: mauritslamers: yes it does, you'll have to copy the props from the original view
+[22:38] devinus: 'value minimum maximum'.w()
+[22:38] mauritslamers: perhaps that could also be done by adding it in the init()?
+[22:39] mauritslamers: thanks, I will try to make stuff happen 
+[22:40] devinus: mauritslamers: oh, also really weird behaviour that alexiskander says is for backwards compat is any classes you add on the render function
+[22:40] devinus: they need to be added back in the update function
+[22:40] devinus: counter-intuative, i know
+[22:41] mauritslamers: it isn't counter-inituative if the update is just a replace
+[22:42] mauritslamers: it is not what you'd normally want, but there is a certain logic to it 
+
+</code>
+
+code of first gist:
+<code javascript>
+SC.AceTheme.renderers.MediaSlider = SC.BaseTheme.renderers.Slider.extend({
+
+  render: function (context) {
+    // im in ur render function, rendering ur renderer
+    // sc_super();
+  },
+
+  update: function () {
+    // i can haz update?
+    sc_super();
+  }
+
+});
+
+SC.AceTheme.renderers.mediaSlider = SC.AceTheme.renderers.MediaSlider.create();
+</code>
+
+code of second gist:
+<code javascript>
+MyApp.MediaSliderView = SC.SliderView.extend(
+/** @scope MyApp.MediaSliderView.prototype */ {
+
+  createRenderer: function (theme) {
+    var ret;
+    if (!theme.sortButton) return null;
+    ret = theme.mediaSlider();
+    this.updateRenderer(ret);
+    return ret;
+  },
+
+  updateRenderer: function (renderer) {
+    renderer.attr({
+      someAttrIWannaPassToMyRenderer: this.get('someAttrIWannaPassToMyRenderer')
+    });
+  }
+
+});
+</code>

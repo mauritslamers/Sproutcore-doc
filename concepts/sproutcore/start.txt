@@ -1,5 +1,9 @@
 ====== Concepts used inside the Sproutcore framework ======
 
+===== Sproutcores Object Oriented System =====
+
+Javascript is an Object Oriented language, but doesn't follow the class and instance pattern used in many other object oriented languages and environments. Sproutcore wraps the Javascript system to build a class and instance pattern. [[concepts:sproutcore:objectoriented | More...]]
+
 ===== MVC: Model-View-Controller =====
 
 Sproutcore is an implementation of the Model-View-Controller development paradigm. In implementing this paradigm, the framework follows the implementation model as used in Cocoa/NeXTStep. Two concepts are of major importance in this model: the inheritance model and the observer/binding pattern.

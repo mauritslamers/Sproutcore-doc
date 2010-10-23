@@ -1,0 +1,6 @@
+[[notes:aboutviews | basic custom view building]] 
+A conversation between erichocean and ku0n about building custom views
+
+[[notes:howtogetclassinruntime | how to get to a class in runtime]]
+
+[[notes:howtocustomrenderer | How to do a custom renderer]]

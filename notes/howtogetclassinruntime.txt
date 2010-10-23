@@ -1,0 +1,28 @@
+
+
+myObject.constructor.toString()
+<code>
+
+[11:10] rvalle: Hi!! Does anybody know How can I know, at runtime, what the class of an object is? I am trying to create some polimorfic responders... but I can't find the way...
+[11:11] martoche: rvalle: SC.kindOf
+[11:12] rvalle: martoche: yea, but my problem is that controller.content is not kindOf SC.Record. and I can't findout what kind it is for later testing. object.getClass kind of thing would be ideal.
+[11:13] martoche: rvalle: SC._object_className
+[11:13] martoche: not sure why is private though
+[11:14] martoche: *it's
+[11:14] rvalle: fantastic!!
+[11:14] rvalle: ooops, it is returning "anonymos" for the objectcontroller.content
+[11:15] martoche: what kind is it supposed to be?
+[11:15] rvalle: probably some kind of dynamic mix that SC worked out for better performance. mmmm still don't know how to guess that class is held in a controller....
+[11:16] rvalle: i don't know what "Anonymous" means...
+[11:16] martoche: what class is the content supposed to be?
+[11:17] rvalle: is an APP.MyRecord that extends SC.Record
+[11:18] rvalle: I have different types of records, and depending on the type held, i want to tune a bit the UI, States, SC. I think it could be very powerfull... just don0t know how to do it!
+[11:20] martoche: rvalle: oh, it's SC._object_className(myObject.constructor)
+[11:20] rvalle: YEEEAAAHHH that looks much better!
+[11:21] martoche: rvalle: or even better, myObject.constructor.toString()
+[11:21] martoche: so you don't use the private method
+[11:21] rvalle: martoche: excellent! your the best! thanks a lot! saved me long hours!
+[11:22] martoche:
+[11:22] rvalle: there is a "SC.SelectionSet" wrapping the record, that's why It didn't match with kindOf 
+
+</code>

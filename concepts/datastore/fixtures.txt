@@ -1,0 +1,9 @@
+====== Fixtures ======
+
+Fixtures are static data sets defining a set of data per model. 
+Fixtures are very useful for developing, as they allow you to use data in your application in development without having to hook up your development environment to the actual server back end. 
+Moreover, fixtures can be used for static data in your application, providing a nice and easy way to have typical static data such as menus, which can be easily extended.
+
+====== Examples ======
+
+example of a fixture

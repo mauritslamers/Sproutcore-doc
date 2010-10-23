@@ -1,0 +1,330 @@
+Conversation between erichocean and ku0n on 19 october 2010
+
+<code>
+[11:05] erichocean: ku0n: I guess you could modify your copy of sproutcore to do that
+[11:05] ku0n: I tried to freeze my ui when the status is busy but it doesn't work
+[11:06] ku0n: I tried to bind isEnabled to status with a transform that check for busy
+[11:06] erichocean: most people bind the isEnabled property to the isBusy property on the model object
+[11:06] ku0n: but it doesn't work:(
+[11:07] ku0n: isBusy doesn't work either
+[11:07] ku0n: keep being enabled all the time
+[11:07] erichocean: oops, I mean the isEditable property
+[11:07] ku0n: I tried a lot, isEnabled, isEditable, isVisible
+[11:08] erichocean: then your binding is wrong
+[11:08] erichocean: this works in a lot of apps
+[11:08] erichocean: isEditable is the property to bind to
+[11:12] ku0n:   isEditableBinding:SC.Binding.from(".parentView.content.isBusy").not().oneWay(),
+[11:12] erichocean: first, don't bind to views
+[11:13] erichocean: second, it should be: isEnabled: 'NameSpace.yourObjectController.isEditable'
+[11:13] erichocean: wait, isEnabledBinding
+[11:13] erichocean: but otherwise, that's the binding approach
+[11:13] ku0n: I must use parentView, because it's an item in a collection view
+[11:14] erichocean: yourObjectController should have it's content be the record object you want to bind to
+[11:14] erichocean: don't do that
+[11:14] erichocean: as you've discovered, it won't update the way you expect
+[11:14] erichocean: it's also super slow
+[11:15] erichocean: '.parentView*content.isEditable' would be the correct binding path in that case
+[11:15] erichocean: but really, you should stop using subviews in your exampleView
+[11:15] ku0n: I've seen a lot of people doing it
+[11:16] erichocean: add the SC.ContentDisplay mixin
+[11:16] erichocean: and then do contentDisplayProperties: ["isEditable"]
+[11:16] erichocean: and add any other properties you're using to render
+[11:16] erichocean: ku0n: lot's of people make poor decisions
+[11:17] erichocean: it's not designed to render or update efficiently if you use child views
+[11:17] erichocean: not in a collection view
+[11:17] ku0n: ok, but then how am I supposed to have complex item in my list view?
+[11:17] erichocean: and as a general rule, you should not bind to other views
+[11:17] erichocean: render complex content
+[11:17] erichocean: you do know HTML, right?
+[11:17] ku0n: I mean, each row has about a dozen label, all editable
+[11:17] ku0n: yea of course
+[11:17] erichocean: well, there you go
+[11:18] ku0n: yea but I want to be able to double click my label to get nice edition, I don't want to reimplement everything from scratch
+[11:18] erichocean: good luck with not writing HTML
+[11:19] erichocean: trying to reuse a bunch of SC controls in a list item view is just asking for performance problems
+[11:20] erichocean: some people have two views, one the use for normal display, and the other a "heavy" view that is done the way you're doing it now, and they switch between the two on selection
+[11:20] erichocean: that's better
+[11:20] erichocean: but making editable content isn't particularly tricky (it's a jQuery call), so I'd just learn how to do it
+[11:21] erichocean: how much time have you spent on this binding stuff?
+[11:21] ku0n: like 30 minutes
+[11:21] ku0n: I guess as a whole I spent a lot of time on that collection
+[11:22] ku0n: and I don't have the behavior I'd really like
+[11:22] ku0n: but I've been told that I should avoid writing html or jquery js as possible
+[11:22] erichocean: who told you that?
+[11:22] erichocean: you should only use jQuery for editing/event situations
+[11:22] ku0n: can't remember
+[11:23] erichocean: e.g. during mouseDown/mouseUp/click/doubleClick
+[11:23] erichocean: the rest of the time, it should be straight HTML
+[11:23] erichocean: and it's one method to override (the 'render' method)
+[11:23] ku0n: ok, so let's start again.
+[11:23] ku0n: I have a list view, each rom is composed of about 10 columns
+[11:23] erichocean: and use the SC.ContentDisplay mixin and contentDisplayProperties to register for updates properly
+[11:23] ku0n: when I select a row, I'd like to be able to edit each value
+[11:24] mauritslamers: gridview?
+[11:24] ku0n: now, I have an example view with 10 labelview with isEditable set to yes
+[11:24] brettgoulder left the chat room. (Remote host closed the connection)
+[11:24] ku0n: it works, but I have to double click every label to edit
+[11:25] ku0n: mauritslamers: kinda
+[11:28] brettgoulder joined the chat room.
+[11:28] erichocean: right, so that's 10 binding creation and updates for every row in your list
+[11:28] erichocean: not to mention all the subviews
+[11:28] erichocean: each of which is binding to the DOM, I might add
+[11:28] erichocean: four times each
+[11:28] erichocean: so that's 40 times per row
+[11:29] ku0n: please don't hit me, I've been using SC for a couple of days only.
+[11:29] erichocean:
+[11:29] erichocean: I'm just showing what the cost is, so you can see why we don't recommend it
+[11:29] ku0n: I'm looking at http://docs.sproutcore.com/symbols/src/_Users_charles_Sites_sproutcore_samples_frameworks_sproutcore_frameworks_desktop_views_list_item.js.html
+[11:29] ku0n: to implement my render function
+[11:30] erichocean: that's kind of a nasty render function
+[11:31] ku0n: do you have a clean example to direct me to?
+[11:34] erichocean: SC.ProgressView is reasonably clean
+[11:34] erichocean: shows how to do classes on the context tag
+[11:34] erichocean: how to pass custom HTML to the render context
+[11:35] erichocean: how to handle firstTime (hint: that's when you add the HTML)
+[11:35] erichocean: text field handling involves using the SC.Editable mixin
+[11:35] erichocean: and I'd definitely read SC.TextFieldView to see how to register for the DOM events
+[11:36] erichocean: personally, I would not register anything until you get the first mouseDown
+[11:36] erichocean: then I would register for the DOM editing events and start editing on the label that was clicked
+[11:37] ku0n: can I use the SC.Control mixin to make my row selectable, and then rerender a different html when the row is selected?
+[11:37] erichocean: you can also handle the tab key so you can go from one field to the next
+[11:37] erichocean: you can
+[11:38] erichocean: the built-in views look like stuff you wouldn't want to write yourself because they try and be general
+[11:38] erichocean: and it just makes the code nasty and really doesn't work that well for anyone anyway
+[11:38] erichocean: when you know what the HTML and CSS should be, it's pretty straightforward to render that
+[11:38] ku0n: how should I position my things inside my row?
+[11:38] erichocean: CS
+[11:38] erichocean: CSS
+[11:39] ku0n: yea but I mean, absolute or flowing? or doesn't matter?
+[11:39] erichocean: you can use absolute or relative positioning, it's up to you
+[11:39] ku0n: ok
+[11:39] erichocean: I'd add custom ids to each label
+[11:40] ku0n:               ctx.begin('label').push(this.getPath('content.label')).end();
+[11:40] erichocean: like this: var labelId = this.get('layerId') + '-mylabel';
+[11:40] erichocean: you don't need the begin() and end()
+[11:41] erichocean: context.push('a', 'bunch', 'of', 'HTML', 'string')
+[11:41] ku0n: haa cool
+[11:41] ku0n: and how do I escape the html?
+[11:41] erichocean: context does it for you
+[11:41] ku0n: I mean, my label is dirty, I need to escape it
+[11:41] ku0n: ok
+[11:42] erichocean: oh, for that you would need to I think
+[11:42] erichocean: SC.RenderContext.escapeHTML(value)
+[11:42] ku0n:               ctx.push('<label>', this.getPath('content.label'), '</label>');
+[11:42] ku0n: ok
+[11:42] erichocean: yep
+[11:42] erichocean: I'd look at SC.RenderContext source code to see how it works
+[11:42] ku0n: ok
+[11:42] erichocean: there's debugging stuff you can turn on to catch any issues
+[11:43] erichocean: writing custom views is fundamental IMO to correct SC usage
+[11:43] erichocean: think of the visible views in SC as demo code
+[11:43] ku0n: ok
+[11:43] erichocean: and reuse the positioning views
+[11:43] erichocean: since there is no visible component to modify, they'll look fine in your app 
+erichocean: when you're deciding at what granularity to make a view, use the largest granularity that makes sense
+[11:44] mauritslamers: erichocean: I completely agree. with both your approval, I'd like to use this conversation as basis for some docs on this... 
+[11:44] erichocean: so, for a list item, it's the _whole_ list itme
+[11:45] ku0n: by reuse, you mean I should look at render second argument?
+[11:45] erichocean: no, I mean inside your app
+[11:45] ku0n: ha you mean SC.View?
+[11:45] erichocean: it's very tempting to try and re-use views and create these big huge view hierarchies in your pages
+[11:46] erichocean: with lots of complicated bindings and whatever
+[11:46] erichocean: instead, look at your app from the user's perspective
+[11:46] erichocean: identify what the _user_ sees as a "widget", and then make a custom view for that whole area
+[11:46] ku0n: mauritslamers: I think that the fact that we need to implement custom view is really important to emphasis
+[11:46] erichocean: even though we as programmers can see it's actually a bunch of sub-widgets that work together
+[11:47] erichocean: for instance, the Mac OS X Mail.app, the header of a message is a bunch of labels and stuff
+[11:47] ku0n: I've been googling a lot, and in the SC group, I've seen a lot of people doing as I do, an exampleView is just an SCView with tons of child views
+[11:47] erichocean: to the user, _that whole section_ is one "widget" – it's the mail message header
+[11:47] erichocean: in SC, you would have one view that did all of that
+[11:47] erichocean: rather than 18 or whatever subviews
+ku0n: erichocean: http://gist.github.com/633944
+[11:58] ku0n: this works fine
+[11:58] erichocean: nice 
+[11:58] erichocean: it should scroll way faster too
+[11:58] ku0n: now, how do I bind the input text with the value?
+[11:58] erichocean: look at SC.Editable
+[11:59] erichocean: it's got methods in there for you to call
+[11:59] erichocean: and look at SC.TextFieldView for how to attach to the DOM events on the <input> elements
+[11:59] erichocean: start with willCreateLayer and didCreateLayer
+[12:00] erichocean: there's a didUpdateLayer call, I believe
+[12:00] erichocean: since you're swapping out the HTML, you would register there
+[12:02] erichocean: you have to delay registering because you're just adding strings to the context -- they're not in the DOM yet
+[12:03] ku0n: erichocean: can't find it
+</code>
+
+Code in the gist.github.com url:
+<code javascript>
+            render:function(ctx) {
+              var s = this.get('isSelected');
+              ctx.addClass('entry-list-item');
+
+
+              if(s) {
+                ctx.push('<input type="text" class="label" value="',
+                  this.getPath('content.label'),
+                '"></input>');
+                ctx.push('<input type="text" class="quantity" value="',
+                  this.getPath('content.quantity'),
+                '"></input>');
+              }
+              else {
+                ctx.push('<label class="label">',
+                  SC.RenderContext.escapeHTML(this.getPath('content.label')),
+                '</label>');
+                ctx.push('<label class="quantity">',
+                  SC.RenderContext.escapeHTML(this.getPath('content.quantity')),
+                '</label>');
+              }
+            }
+</code>
+
+conversation continues:
+<code>
+[12:04] erichocean: can't find...what?
+[12:04] ku0n: didUpdateLayer
+[12:04] erichocean: it's not defined by default
+[12:04] ku0n: an example implementation somewhere
+[12:05] erichocean: there's on in Greenhouse.AnchorView
+[12:05] erichocean: it's the same code you would put in didCreateLayer
+[12:05] erichocean: http://gist.github.com/633953
+[12:06] erichocean: that's got canvas code (since you need to use actual code to draw on a canvas...)
+[12:06] erichocean: but you could also register for DOM events, use jQuery, etc.
+[12:06] erichocean: mauritslamers: I agree that the view stuff needs to be in the wiki
+[12:07] erichocean: IMO creating a custom view with event handling should be among the first things a SC coder learns
+[12:07] erichocean: then they would know that all of their HTML/CSS/jQuery skills transfer over 
+</code>
+
+code in http://gist.github.com/633953:
+<code javascript>
+didUpdateLayer: function() {
+    var elem = this.$('canvas'),
+        ctx = elem[0].getContext("2d"),
+        width = this.$().width(),
+        height = this.$().height(),
+        loc = this.get('anchorLocation'),
+        ploc, color, x, y, tmp;
+
+    // adjust size as needed...
+    if (Number(elem.attr('width')) !== width) elem.attr('width', width);
+    if (Number(elem.attr('height')) !== height) elem.attr('height', height);
+    width--; height--; // adjust for being off 0.5
+
+    // do the drawr-ing!
+    if (!this.get('isEnabled')) loc = null;
+    color = loc ? 'black' : 'rgb(128,128,128)';
+    
+    ctx.save();
+    ctx.lineWidth = 1;
+    ctx.fillStyle = 'rgb(255,255,255)';
+    ctx.strokeStyle = color;
+    ctx.fillRect(0.5, 0.5, width, height);
+    ctx.strokeRect(0.5, 0.5, width, height);
+
+    ctx.strokeStyle = color;
+    ctx.strokeRect(20.5, 20.5, width-40, height-40);
+
+    ctx.beginPath();
+    ctx.moveTo(Math.floor(width/2)+0.5, 20.5);
+    ctx.lineTo(Math.floor(width/2)+0.5, Math.floor(height-20)+0.5);
+    ctx.moveTo(20.5, Math.floor(height/2)+0.5);
+    ctx.lineTo(Math.floor(width-20)+0.5, Math.floor(height/2)+0.5);
+    ctx.stroke();
+    ctx.restore();
+
+    loc = this.get('anchorLocation');
+    
+    ploc = this.get('proposedAnchorLocation');
+    if (ploc && ploc !== loc) {
+      color = this.get('isActive') ? 'rgb(80,80,80)' : 'rgb(200,200,200)';
+      this._drawAnchorAt(ploc, ctx, color, width, height);
+    }
+    
+    this._drawAnchorAt(loc, ctx, 'red', width, height);
+  },
+
+</code>
+
+conversation continues:
+<code>
+ku0n: erichocean: in my didUpdateLayer how can I register for event
+[12:11] ku0n: I mean on my input field
+[12:12] dominikl: hi guys, do you know if jQuery is used for any animation/drag/drop-stuff inside of SproutCore so far?
+[12:12] erichocean: var input = this.$('input');
+[12:13] erichocean: SC.Event.add(input, 'focus', this, this._fieldDidFocus);
+[12:13] ku0n: ok, I tried input.change() but didn't work
+[12:13] erichocean: ..later..
+[12:13] erichocean: SC.Event.remove(input, 'focus',  this, this._fieldDidFocus);
+[12:13] erichocean: since you'll have multiple input field, I would give them different ids and use that to find them
+[12:14] ku0n: yea
+[12:14] erichocean: var id = this.get('layerId') + '-inputName';
+[12:14] erichocean: the layerId will be unique
+[12:14] ku0n: ok
+[12:14] erichocean: sc1234 or whatever
+[12:15] erichocean: I'd do classNames: 'my-custom-row'.w() on the view, too
+[12:15] zebarto left the chat room.
+[12:15] ku0n: yea I did that already
+[12:15] erichocean: sweet 
+[12:16] erichocean: do you know jQuery?
+[12:16] ku0n: yea, been using it for a lot of times
+[12:16] ku0n: did about 50 projects with it
+[12:16] erichocean: so, you're basically home free at this point
+[12:16] ku0n: now I have a little problem, when I select my row, I see the inputs, but I can't place the cursor in it
+[12:16] zebarto joined the chat room.
+[12:16] erichocean: you can render your own HTML, put in your own CSS, and handle events at the view level, + custom jQuery stuff
+[12:17] ku0n: ok
+[12:19] erichocean: you need override mouseDown:
+[12:20] dominikl: erichocean: hi, sorry to bother you, but you seem to be quite experienced at sproutcore. whats the best way to render my own html? do I have to write my own renderContexts and stuff since the render() inside a view acually doesn't really do the rendering any more. is there a documentation about that out there? THX a lot in advance!!
+[12:21] ku0n: erichocean: yea found out how
+[12:22] erichocean: render: function(ctx) { ctx.push('<ul>', '<li>Item 1', '<li>Item 2', '</ul>'); }
+[12:22] erichocean: you just push the HTML elements you want to end up in the DOM
+[12:23] erichocean: you can also create an array, push new strings onto the array, and then pass the array to ctx.push()
+[12:23] erichocean: I typically do that, actually
+[12:23] erichocean: because then, when I'm debugging, I can do console.log(ary.join(''));
+[12:23] erichocean: and see what HTML I'm giving to the context
+[12:23] erichocean: you don't need to modify SC.RenderContext
+[12:23] dominikl: ah ok, that sounds good!
+[12:24] erichocean: what SC does is it looks at your view tree and decides what needs to be rendered
+[12:24] erichocean: and then it finds the highest view in the view tree
+[12:24] erichocean: and starts calling the render() methods, in order, working down the view tree
+[12:24] ku0n: erichocean: got one more little problem:P now I can put my cursor inside my input, but if I hit arrow or delete, the key event is sent to the listview
+[12:24] erichocean: it accumulates all of the HTML strings in an array as it goes
+[12:24] ku0n: I tried to override keyDown but no luck
+[12:25] erichocean: and then it joins them and does an innerHTML call to the browser
+[12:25] dominikl: ok, sound pretty easy .... I thought I had to extend Renderes and RenderContexts
+[12:25] erichocean: so SC only touches the DOM _once_ each event loop to redraw any update HTML
+[12:25] erichocean: I don't really know how the Renderers work
+[12:25] erichocean: I think it's just a way to delegate render: function calls so you can do themeing
+[12:25] erichocean: I don't use them myself
+[12:26] erichocean: alexiskander knows about the Renderers stuff, and I'm sure would have you do things differently
+[12:26] erichocean: I also don't use all of the tools SC has to create HTML
+[12:27] erichocean: or rather, CSS
+[12:27] dominikl: yeah, I read his blog posts about the rendering-stuff but I didn't really get it 
+[12:27] erichocean: because I don't want to learn new tools to be honest
+[12:27] erichocean: it makes it very hard for me to get help when something breaks
+[12:27] dominikl: thats true
+[12:27] erichocean: I'd rather use standard HTML and CSS
+[12:27] erichocean: and SC makes that _super_ easy
+[12:27] zebarto left the chat room.
+[12:27] zebarto joined the chat room.
+[12:28] erichocean: ku0n: I believe you need to call makeFirstResponder for that
+[12:28] erichocean: actually, yeah, you're in an input field
+[12:28] dominikl: erichocean: thx so far!!
+[12:28] erichocean: you need to register for the keypress event
+erichocean: keyboard handling for an _active_ input field is done the old way, not using the responder methods like keyPress:
+[12:29] erichocean: that's a browser limitation, unfortunately
+[12:30] erichocean: SC.TextFieldView has code to deal with them
+[12:30] ku0n: my keydown is not called
+[12:31] erichocean: I'd look in Safari or FF and see if your handler is actually on the input element
+[12:31] erichocean: also, add willBecomeKeyResponderFrom: and see if you get that
+[12:32] erichocean: your view should be keyResponder
+[12:33] ku0n: how do I make it keyresponder?
+[12:34] erichocean: this.becomeFirstResponder()
+[12:34] erichocean: in your view
+[12:35] zebarto left the chat room.
+[12:35] erichocean: I would have thought your view would have gotten it automatically, but since it's a list view item, perhaps not
+[12:35] zebarto_ joined the chat room.
+[12:36] zebarto_ left the chat room. (Client Quit)
+[12:37] erichocean: dang, I've got to hit the hay. good luck!
+[12:37] ku0n: ok thanks
+</code>
