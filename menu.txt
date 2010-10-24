@@ -11,6 +11,7 @@
       * [[concepts:sproutcore:computedproperty | Computed Property]]
       * [[concepts:sproutcore:mixins | Mixins]]
       * [[concepts:sproutcore:runloop | RunLoop]]
+    * [[concepts:views:start | View system]]
     * [[concepts:datastore:start | DataStore ]]
       * [[concepts:datastore:models | Models ]]
       * [[concepts:datastore:fixtures | Fixtures ]]
