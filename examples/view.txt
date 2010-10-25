@@ -1,0 +1,23 @@
+=== View ===
+
+<code javascript views/my_view.js>
+MyApp.myView = SC.View.extend(
+/** @scope MyApp.MediaSliderView.prototype */ {
+ 
+  createRenderer: function (theme) {
+    var ret;
+    if (!theme.myView) return null; // circumvents bug in quilmes
+    ret = theme.myView();
+    this.updateRenderer(ret);
+    return ret;
+  },
+ 
+  updateRenderer: function (renderer) {
+    renderer.attr({
+      someAttrIWannaPassToMyRenderer: this.get('someAttrIWannaPassToMyRenderer')
+    });
+  }
+ 
+});
+
+</code>

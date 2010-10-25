@@ -1,0 +1,20 @@
+=== Renderer ===
+<code javascript renderers/my_view.js>
+
+SC.BaseTheme.renderers.MyView = SC.BaseTheme.renderers.View.extend({
+ 
+  render: function (context) {
+    // I am the function called by the views first render. 
+    sc_super(); // use this to call the renderer of the view you are extending
+  },
+ 
+  update: function () {
+    // I am the function called when the view should be updated. What should I update?
+    sc_super(); // use this to call the renderer of the view you are extending
+  }
+ 
+});
+ 
+SC.AceTheme.renderers.myView = SC.AceTheme.renderers.MyView.create();
+
+</code>

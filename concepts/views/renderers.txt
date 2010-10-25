@@ -1,0 +1,13 @@
+====== Renderer system ======
+
+The renderer system is an attempt to reduce the number of DOM interactions, to ease updates to views, to make theming more easy and to enable more easy creation of custom views.
+
+A renderer is a class extending a base renderer. The class needs to contain a render and an update function. The render function is called once to create the initial view. The update function is called for every change in the displayProperties of its view. 
+
+SC contains and uses jQuery. You can get a jQuery reference to the current view using this.$(). You can then use the standard jQuery queries to deal with the internal html elements.
+
+The file of the renderer code also contains the creation of one instance of the class as property of the renderers collection.
+
+====== Examples ======
+
+<embed examples:renderer />

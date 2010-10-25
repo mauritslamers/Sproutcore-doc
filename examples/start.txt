@@ -13,3 +13,7 @@
 [[examples:get | .get() ]]
 
 [[examples:set | .set() ]]
+
+[[examples:view | view ]]
+
+[[examples:renderer | renderer ]]

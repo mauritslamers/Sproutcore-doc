@@ -5,3 +5,9 @@ Interesting links
 [[http://github.com/martoche/garcon]]
 
 [[http://github.com/etgryphon/sproutcore-ui]]
+
+About jQuery. very practical when writing custom renderers\\
+[[http://eng.wealthfront.com/2010/10/jquery-right-way.html]] 
+
+Thinking of your software as a butler is difficult but important:
+[[http://blog.garlicsim.org/post/1388741380/thinking-of-your-software-as-a-butler-is-difficult-but]]
