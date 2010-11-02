@@ -18,5 +18,6 @@ The store is a central storage module to be used as the in-memory storage of rec
 
 The datasource is a module connecting the store to a server backend. [[concepts:datastore:datasource | More...]]
 
+===== Queries =====
 
-
+Queries form a special way of finding data in your store as they allow a SQL like approach to searching. [[concepts:datastore:queries | More...]]

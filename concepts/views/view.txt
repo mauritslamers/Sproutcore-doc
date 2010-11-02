@@ -1,8 +1,8 @@
 ====== View ======
 
-A Sproutcore view is an object containing the logic of a view. This means it contains properties to which a value can be bound, observers that deal with data extraction from the data bound to the view, but it doesn't contain the code for actually creating and updating the HTML elements displaying the data.
+A Sproutcore view is an object containing the logic of a view. This means it contains properties to which a value can be bound, observers that deal with data extraction from the data bound to the view, but it doesn't contain the code for actually creating and updating the HTML elements displaying the data. 
 
-In order to display the view, a view has a createRenderer and an updateRenderer function. 
+In order to display a view, a view can have a createRenderer and an updateRenderer function.
 
 The createRenderer function sets up the link from the view to the renderer object and adds the renderer object to the update cycle.
 

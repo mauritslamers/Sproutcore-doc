@@ -1,0 +1,28 @@
+
+dd. 21-10-2010
+
+<code>
+alexiskander: .design is a special form of .extend
+[19:51] mauritslamers: ah ok 
+[19:51] alexiskander: when a view is instantiated, createChildViews is called
+[19:52] hvgotcodes: alexiskander: right
+[19:52] alexiskander: this loops over the child views, and if any are classes, it calls .create()
+[19:52] hvgotcodes: the childViews array, right?
+[19:52] alexiskander: and sets this[theKeyListedInChildViews] = theCreatedView;
+[19:52] alexiskander: right
+[19:52] hvgotcodes: right so if you have childViews: 'input1 input1'.w()
+[19:53] hvgotcodes: and then input1 and input2 defined as props on the view
+[19:53] hvgotcodes: input1 and input2 are design
+[19:53] alexiskander: right
+[19:53] alexiskander: you can also use .extend
+[19:53] hvgotcodes: when CCV runs, does it replace the design with the actual instance?
+[19:53] alexiskander: yes
+[19:53] hvgotcodes: right
+[19:54] alexiskander: in effect, it does:
+[19:54] hvgotcodes: thats what i am seeing
+[19:54] alexiskander: this[theKeyInChildViews] = this[theKeyInChildViews].create()
+[19:54] alexiskander: though there is a bit more involved
+[19:54] hvgotcodes: aaah
+[19:54] hvgotcodes: right
+[19:54] hvgotcodes: cool
+</code>

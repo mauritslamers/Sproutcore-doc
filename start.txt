@@ -1,21 +1,20 @@
-====== SproutCore ======
+**Sproutcore** is a framework for producing fast, reliable and maintainable web applications with demanding interactivity and state-management requirements. It's designed for developers who don't want their framework to give up before they're finished. It is a framework designed to create applications that resemble desktop applications, but run inside a browser.
 
-Sproutcore is a web application framework written in Javascript especially suited for developing desktop-grade applications.
+This is accomplished using a number of technologies:
+  * Model-View-Controller architecture and Key-Value Observing
+  * Client-side HTML generation, completely server-agnostic
+  * Integrated build tools to package files for minimal download time and client-side caching
+  * Starting code generated from templates to provide code structure
+  * OS-agnostic development environment for rapid coding/testing cycles
+  * A language and framework for unit-testing
 
-For all information in this documentation except the Javascript part it is assumed you are familiar with Javascript. 
+Sproutcore is very suitable for web applications requiring dynamical interfaces, such as:
+  * multi-user administrative applications
+  * web applications requiring much interaction
+  * dynamic data driven representation applications
 
-===== Javascript =====
-While the syntax may be familiar to you because it resembles C, Javascript is very unlike C. If you don't know the language well, we therefore strongly recommend you to familiarize yourself with the language first. [[javascript:start | To Javascript]]
+Sproutcore can of course be used to develop applications that don't need dynamic interfaces such as blog applications or animated elements on a web page. Using the framework for this kind of application will be a suboptimal experience however, and a different approach could well be more suitable.
 
-===== Tutorials =====
-To help you start using the Sproutcore to develop your applications, tutorials are often very useful. [[tutorials:start | To the Tutorials ]]
-
-===== Concepts =====
-Learning about the concepts used in and by Sproutcore helps you using the framework optimally. [[concepts:sproutcore:start | To the concepts ]]
-
-===== Reference =====
-Often you want to look up specific parts of information about Sproutcore. [[reference:start | To the reference ]]
-
-===== Examples =====
-In this documentation many examples are used. You can also browse these examples directly. [[examples:start | To the  Examples ]]
+**Assumptions:**\\
+In writing this documentation we assume that the reader will be a developer. The developer does not need to know much about Javascript, but is strongly advised to read into the language and watch the videos.
 

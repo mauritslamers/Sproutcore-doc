@@ -1,3 +1,4 @@
+  * [[gettingstarted:start | Getting Started]]
   * [[javascript:start | Javascript]]
   * [[tutorials:start | Tutorials]]
   * [[concepts:start | Concepts ]]

@@ -8,8 +8,12 @@ While Sproutcore can be called an application development framework, it actually
 
 ===== Sproutcore View system =====
 
-Sproutcore incorperates a view system. The view system is a way to wrap the browser DOM elements in such a way that creating and updating these DOM elements occurs automatically. [[concepts:views:start | More...]]
+The view system is a way to wrap the browser DOM elements in such a way that creating and updating these DOM elements occurs automatically. [[concepts:views:start | More...]]
 
 ===== The Data store framework ======
 
 The Data store framework allows you to hook up your Sproutcore application to a server back end and to use the data from that server back end in a way consistent with the MVC paradigm. [[concepts:datastore:start | More...]]
+
+===== Responders =====
+
+// we need to tell a bit about responders here //

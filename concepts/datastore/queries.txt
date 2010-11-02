@@ -1,0 +1,11 @@
+====== Queries ======
+
+Queries form a special way of finding data in your store as they allow a SQL like approach to searching.
+
+===== Local queries =====
+
+
+===== Remote queries =====
+
+(mention the proper way to deal with remote queries in a data source?
+first loadQueryResults() then dataSourceDidFetchQuery() )...

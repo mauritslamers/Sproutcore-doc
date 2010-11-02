@@ -17,3 +17,5 @@
 [[examples:view | view ]]
 
 [[examples:renderer | renderer ]]
+
+[[examples:objectliteral | object literal ]]

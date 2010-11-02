@@ -1,0 +1,17 @@
+=== Object literal ===
+
+<code javascript>
+{
+  myNumberProperty: 1,
+  
+  myStringProperty: 'a string',
+  
+  myArrayProperty: ['a','number','of','array','elements'],
+  
+  myObjectPropery: {
+                     again: 'an',
+                     object: 'literal'
+                   }
+}  
+
+</code>

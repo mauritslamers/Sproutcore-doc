@@ -8,10 +8,11 @@ Its role in the application is to be the single source and storage of all record
 
 Finding records is one of the most used functionalities of the store. 
 
+
 ===== Queries =====
 
 Queries form a special way of finding data in your store as they allow a SQL like approach to searching.
-
+(point to the other page on queries?)
 
 
 ===== old stuff =====

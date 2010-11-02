@@ -1,7 +1,6 @@
 ====== Sproutcores Object Oriented system ======
 
-While Javascript is an object oriented language, it doesn't follow the class and instance system used in many other object oriented programming language and development frameworks. 
-As Sproutcore follows the Cocoa framework, it needs to have a class and instance system. In order to do that, Sproutcore wraps the object and prototype system in such a way that they can be used as a class and instance system.
+Javascript is an object oriented language. However, it doesn't follow the classical class and instance system used in many other object oriented programming language and development frameworks. Because Sproutcore follows the Cocoa framework, it needs to have a class and instance system. In order to do that in Javascript Sproutcore wraps the object and prototype system in such a way that they can be used as a class and instance system.
 
 The resulting class and instance pattern is still Javascript though, so it allows to be used much more flexible than you might expect. One of the Javascript elements that is being used heavily in Sproutcore is the object literal, an object with properties and methods that is defined on the spot.
 
@@ -13,9 +12,7 @@ If you need to set some standard value to a property, use the init() constructor
 
 ====== Examples ======
 
-object literal? 
-
-class and instance
+<embed examples:objectliteral />
 
 <embed examples:extend />
 

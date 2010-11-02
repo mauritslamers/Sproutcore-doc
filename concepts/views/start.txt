@@ -3,7 +3,10 @@
 The concept behind the Sproutcore view system is that a view has to be bound to controllers and therefore views should update automatically when the content of the controller or the bound properties change. This allows a developer to concentrate on the program logic and let the view system follow what happens in the controller data.
 
 In order to make the wrapped DOM elements to be redrawn or updated on changes only when the data they show changes, the view system splits up a view in two different parts: the view itself and the renderer.
-This also allows for different theme renderers for the same view. 
+This has quite a few advantages, especially in code reuse:
+  * it allows for reuse of the renderer by views needing the same HTML but with different content by independently extending the view
+  * it allows for reuse of the renderer by other renderers wrapping, extending or adding to the original renderer
+  * it allows for easy dealing with different themes and small adjustments that may be needed for these themes.
 
 ===== The view =====
 

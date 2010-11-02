@@ -1,6 +1,6 @@
 ====== Javascript ======
 
-Javascript is a peculiar programming language, both in history as in workings. Moreover, its name is a complete mismatch: it has very little inheritance from Java and it is nothing like a script language.
+Javascript is a peculiar but remarkable programming language, both in history as in workings. Moreover, its name is a complete mismatch: it has very little inheritance from Java and it is nothing like a script language.
 Javascript is a Object Oriented functional language. As such it has a stronger resemblance to functional languages like Lisp and Scheme than it has to the languages its syntax is borrowed from, like C and Java.
 
 To help you to learn more about this language, we compiled a set of links we think will help you learn about this remarkable programming language.
