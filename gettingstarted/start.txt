@@ -1,16 +1,16 @@
 ====== Getting Started ======
 
-If you are new to Sproutcore and want to start developing, you need to know a few things about the environment you will be using to build Sproutcore applications.
+If you are new to SproutCore and want to start developing, you need to know a few things about the environment you will be using to build SproutCore applications.
 
 ===== Development versus Deployment =====
 
-Because Sproutcore is a web application framework, the deployed application needs to run in the browser. For the user experience of the speed of your application load times are important. The way the application is delivered to the browser should therefore be optimised to load quickly. With a browser, the fastest load times are achieved when there are a minimum number of files, and the Javascript files are be minimised.((Minimising is a process to make the code as compacted as possible. One of the ways to do this is to strip all comments, spaces and new line characters.))
+Because SproutCore is a web application framework, the deployed application needs to run in the browser. For the user experience of the speed of your application load times are important. The way the application is delivered to the browser should therefore be optimised to load quickly. With a browser, the fastest load times are achieved when there are a minimum number of files, and the Javascript files are be minimised.((Minimising is a process to make the code as compacted as possible. One of the ways to do this is to strip all comments, spaces and new line characters.))
 
-As you can imagine, a minified file is not the nicest environment to do development in. So, to allow both a nice development environment and a optimised result, Sproutcore needs a development environment. This development environment is provided by the build tools.
+As you can imagine, a minified file is not the nicest environment to do development in. So, to allow both a nice development environment and a optimised result, SproutCore needs a development environment. This development environment is provided by the build tools.
 
 ===== Build tools =====
 
-The Sproutcore build tools (also known by the code name Abbot) supply an development environment to develop Sproutcore applications. The build tools consist of a set of command-line tools ranging from creating a directory structure for your new application (or set of applications), creating a deploy-ready package, creating several files on the proper places inside the project directory structure and a server to enable you to interact with, test and debug your application under development inside a browser.
+The SproutCore build tools (also known by the code name Abbot) supply an development environment to develop SproutCore applications. The build tools consist of a set of command-line tools ranging from creating a directory structure for your new application (or set of applications), creating a deploy-ready package, creating several files on the proper places inside the project directory structure and a server to enable you to interact with, test and debug your application under development inside a browser.
 
 ===== Installation =====
 

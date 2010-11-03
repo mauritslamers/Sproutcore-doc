@@ -1,8 +1,8 @@
-====== Sproutcores Object Oriented system ======
+====== SproutCores Object Oriented system ======
 
-Javascript is an object oriented language. However, it doesn't follow the classical class and instance system used in many other object oriented programming language and development frameworks. Because Sproutcore follows the Cocoa framework, it needs to have a class and instance system. In order to do that in Javascript Sproutcore wraps the object and prototype system in such a way that they can be used as a class and instance system.
+Javascript is an object oriented language. However, it doesn't follow the classical class and instance system used in many other object oriented programming language and development frameworks. Because SproutCore follows the Cocoa framework, it needs to have a class and instance system. In order to do that in Javascript SproutCore wraps the object and prototype system in such a way that they can be used as a class and instance system.
 
-The resulting class and instance pattern is still Javascript though, so it allows to be used much more flexible than you might expect. One of the Javascript elements that is being used heavily in Sproutcore is the object literal, an object with properties and methods that is defined on the spot.
+The resulting class and instance pattern is still Javascript though, so it allows to be used much more flexibly than in other classical inheritance environments. One of the Javascript elements that is being used heavily in SproutCore is the object literal, an object with properties and methods that is defined on the spot.
 
 Because the result is still a object and prototype pattern and therefore dynamic in nature, you have to be aware of the typical behaviour of these systems: if you initialise a property inside a class definition, this property value becomes a class variable: a variable that synchronizes across all instances of that class.((In Ruby for example, these variables are prepended with @@ to distinguish them from instance variables, which are prepended with @. In Javascript, there is no such syntactical sugar.)) This is often not what you want.
 

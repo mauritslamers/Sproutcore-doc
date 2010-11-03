@@ -1,20 +1,22 @@
-**Sproutcore** is a framework for producing fast, reliable and maintainable web applications with demanding interactivity and state-management requirements. It's designed for developers who don't want their framework to give up before they're finished. It is a framework designed to create applications that resemble desktop applications, but run inside a browser.
+**SproutCore** is a framework written in Javascript for producing fast, reliable and maintainable web applications with demanding interactivity and state-management requirements. It is a framework designed to create applications that resemble desktop applications, but run inside a browser.
 
 This is accomplished using a number of technologies:
   * Model-View-Controller architecture and Key-Value Observing
-  * Client-side HTML generation, completely server-agnostic
-  * Integrated build tools to package files for minimal download time and client-side caching
-  * Starting code generated from templates to provide code structure
+  * completely server-agnostic client-side HTML generation
+  * integrated build tools that package files for minimal download time and client-side caching
+  * helper programs generating code structure from templates
   * OS-agnostic development environment for rapid coding/testing cycles
-  * A language and framework for unit-testing
+  * a language and framework for unit-testing
 
-Sproutcore is very suitable for web applications requiring dynamical interfaces, such as:
+The very elaborate SproutCore toolkit is most suitable for developing web applications with complex dynamic interfaces, such as:
   * multi-user administrative applications
   * web applications requiring much interaction
-  * dynamic data driven representation applications
+  * dynamic data driven applications
 
-Sproutcore can of course be used to develop applications that don't need dynamic interfaces such as blog applications or animated elements on a web page. Using the framework for this kind of application will be a suboptimal experience however, and a different approach could well be more suitable.
+While the framework can also be used to build far less complex applications, such as a blog or an animated element on a static page, it may be wise to consider using other frameworks like jQuery as the experience from both the developers as the users perspective may be suboptimal.
 
 **Assumptions:**\\
-In writing this documentation we assume that the reader will be a developer. The developer does not need to know much about Javascript, but is strongly advised to read into the language and watch the videos.
+In writing this documentation we assume that the reader will be a developer. The developer does not need to know much about Javascript, but is strongly advised to learn about the language and watch the videos.
 
+**Documentation Design**\\
+The basic idea behind writing the documentation as you find it here is to provide the reader different ways of learning all important information and methods. People have different backgrounds and different ways of learning and consequently will have a different level of understanding of the underlying concepts, techniques and methods. The documentation should allow the reader to both skip parts that are already known and learn as much as desired about other lesser-known parts.

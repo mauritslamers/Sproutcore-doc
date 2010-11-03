@@ -1,6 +1,6 @@
 ====== The DataStore framework ======
 
-The DataStore framework is a framework intended to enable the handling and editing of records inside a Sproutcore application and hooking this system up to a server back end of your choosing.
+The DataStore framework is a framework intended to enable the handling and editing of records inside a SproutCore application and hooking this system up to a server back end of your choosing.
 
 ===== Models =====
 

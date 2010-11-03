@@ -1,16 +1,16 @@
-====== Concepts used inside the Sproutcore framework ======
+====== Concepts used inside the SproutCore framework ======
 
-===== Sproutcores Object Oriented System =====
+===== SproutCores Object Oriented System =====
 
-Javascript is an Object Oriented language, but doesn't follow the class and instance pattern used in many other object oriented languages and environments. Sproutcore wraps the Javascript system to build a class and instance pattern. [[concepts:sproutcore:objectoriented | More...]]
+Javascript is an Object Oriented language, but doesn't follow the class and instance pattern used in many other object oriented languages and environments. SproutCore wraps the Javascript system to build a class and instance pattern. [[concepts:sproutcore:objectoriented | More...]]
 
 ===== MVC: Model-View-Controller =====
 
-Sproutcore is an implementation of the Model-View-Controller development paradigm. In implementing this paradigm, the framework follows the implementation model as used in Cocoa/NeXTStep. Two concepts are of major importance in this model: the inheritance model and the observer/binding pattern.
+SproutCore is an implementation of the Model-View-Controller development paradigm. In implementing this paradigm, the framework follows the implementation model as used in Cocoa/NeXTStep. Two concepts are of major importance in this model: the inheritance model and the observer/binding pattern.
 
 ==== Inheritance model ====
 
-Cocoa is an Object Oriented MVC implementation, in which all objects inherit from a single base object. This base object defines standard behaviour and properties that should be shared by every object in the framework. Sproutcore shares this implementation model. [[inheritance| More... ]]
+Cocoa is an Object Oriented MVC implementation, in which all objects inherit from a single base object. This base object defines standard behaviour and properties that should be shared by every object in the framework. SproutCore shares this implementation model. [[inheritance| More... ]]
 
 ==== Roles of Model, View and Controller ====
 
@@ -22,13 +22,17 @@ In Cocoa the roles of Models, Views and Controllers can deviate from what you ar
 
 To prevent having to write code to update every value in every controller and view, SC uses a binding: a link you define which binds the value from a property on a controller or view to a local property. [[bindings| More ...]]
 
+==== Computed Properties ====
+
+Sometimes properties are dependent on other properties. To prevent having to recompute this information every time, SC provides a computed property system. [[computedproperty | More...]]
+
 ==== Observers ====
 
 Observers are special type of functions. These functions are executed whenever a property they observe changes value. Observers are intended to be used within objects. [[observers| More... ]]
 
 ==== Getters and Setters ====
 
-In order to make bindings and observers work inside JavaScript, Sproutcore uses getters and setters. [[getterssetters| More...]] 
+In order to make bindings and observers work inside JavaScript, SproutCore uses getters and setters. [[getterssetters| More...]] 
 
 ===== Mixins =====
 

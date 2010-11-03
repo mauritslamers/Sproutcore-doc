@@ -1,0 +1,12 @@
+====== SproutCore Basic Functions ======
+
+.kindOf()\\
+Use this to check whether the current object is an instance of a certain model or class.
+
+.typeOf()\\
+A SproutCore equivalent of the typeof JavaScript operator
+
+.subclassOf()
+
+.hasSubclass()
+
