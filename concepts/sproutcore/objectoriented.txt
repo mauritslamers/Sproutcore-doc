@@ -1,12 +1,14 @@
 ====== SproutCores Object Oriented system ======
 
-Javascript is an object oriented language. However, it doesn't follow the classical class and instance system used in many other object oriented programming language and development frameworks. Because SproutCore follows the Cocoa framework, it needs to have a class and instance system. In order to do that in Javascript SproutCore wraps the object and prototype system in such a way that they can be used as a class and instance system.
+Javascript is an object oriented language. However, it doesn't have a classical class and instance system used in many other object oriented programming language and development frameworks. 
 
-The resulting class and instance pattern is still Javascript though, so it allows to be used much more flexibly than in other classical inheritance environments. One of the Javascript elements that is being used heavily in SproutCore is the object literal, an object with properties and methods that is defined on the spot.
+Because SproutCore follows the Cocoa framework, it needs to have a class and instance system. SproutCore therefore wraps the object and prototype system in such a way that they can be used as a class and instance system. The resulting class and instance pattern is still Javascript though, so it allows to be used much more flexibly than in other classical inheritance environments. 
 
-Because the result is still a object and prototype pattern and therefore dynamic in nature, you have to be aware of the typical behaviour of these systems: if you initialise a property inside a class definition, this property value becomes a class variable: a variable that synchronizes across all instances of that class.((In Ruby for example, these variables are prepended with @@ to distinguish them from instance variables, which are prepended with @. In Javascript, there is no such syntactical sugar.)) This is often not what you want.
+The flexibility and functional nature of this system becomes apparent as the method to create both classes and instances are function calls. These function calls are often given a parameter in the form of an object literal: an object with properties and methods that is defined on the spot.
 
-The reason you probably will try to do such a thing is because you are used to giving a property a type. Because Javascript is not a strong-typed language, but rather a loose typed language((sometimes this is also called a duck typed language, referencing the "walk like a duck, talk like a duck" saying)), there is no such thing as defining a data type without setting a value.  
+Because the end result is still a object and prototype pattern and therefore dynamic in nature, you have to be aware of the typical behaviour of these systems: if you initialise a property inside a class definition, this property value becomes a class variable: a variable that synchronizes across all instances of that class.((In Ruby for example, these variables are prepended with @@ to distinguish them from instance variables, which are prepended with @. In Javascript, there is no such syntactical sugar.)) This is often not what you want in a class.
+
+The reason you might want to do such a thing is because you are used to giving a property a type. Because Javascript is not a strong-typed language, but rather a loose typed language((sometimes this is also called a duck typed language, referencing the "walk like a duck, talk like a duck" saying)), there is no such thing as defining a data type without setting a value.  
 
 If you need to set some standard value to a property, use the init() constructor function.((don't forget to call sc_super() or the javascript equivalent if you are not using the build tools))
 

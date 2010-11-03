@@ -20,7 +20,7 @@ In Cocoa the roles of Models, Views and Controllers can deviate from what you ar
 
 ==== Bindings ==== 
 
-To prevent having to write code to update every value in every controller and view, SC uses a binding: a link you define which binds the value from a property on a controller or view to a local property. [[bindings| More ...]]
+To prevent having to write code to update every value in every controller and view, SC provides a binding: a link you define which binds the value from a property on a controller or view to a local property. [[bindings| More ...]]
 
 ==== Computed Properties ====
 
@@ -28,15 +28,15 @@ Sometimes properties are dependent on other properties. To prevent having to rec
 
 ==== Observers ====
 
-Observers are special type of functions. These functions are executed whenever a property they observe changes value. Observers are intended to be used within objects. [[observers| More... ]]
+Observers are a special type of functions. These functions are executed whenever a property they observe changes value. Observers are intended to be used within objects. [[observers| More... ]]
 
 ==== Getters and Setters ====
 
-In order to make bindings and observers work inside JavaScript, SproutCore uses getters and setters. [[getterssetters| More...]] 
+In order to make bindings and observers work inside JavaScript, SproutCore uses get and set functions. [[getterssetters| More...]] 
 
 ===== Mixins =====
 
-In order to do multiple inheritance without having the hassle to deal with multiple origin changes (which is one of the nastiest parts of OO), SC uses the Mixins concept. [[mixins| More ...]] 
+In Object Oriented systems multiple inheritance is desired, but often difficult because of the propagation of changes through all classes. To prevent having to deal with these multiple origin changes, the Mixin concept is used. [[mixins| More ...]] 
 
 ===== RunLoop =====
 
