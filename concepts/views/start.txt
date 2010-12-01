@@ -1,6 +1,6 @@
 ====== The SproutCore View system ======
 
-The concept behind the SproutCore view system is that a view has to be bound to controllers and therefore views should update automatically when the content of the controller or the bound properties change. This allows a developer to concentrate on the program logic and let the view system follow what happens in the controller data.
+The concept behind the SproutCore view system is that a view has to be bound to properties of controller objects and therefore views should update automatically when the content of the controller or the bound properties change. This allows a developer to concentrate on the program logic and let the view system follow what happens in the controller data.
 
 In order to make the wrapped DOM elements to be redrawn or updated on changes only when the data they show changes, the view system splits up a view in two different parts: the view itself and the renderer.
 This has quite a few advantages, especially in code reuse:

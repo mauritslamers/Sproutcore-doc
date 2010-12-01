@@ -15,8 +15,8 @@ The very elaborate SproutCore toolkit is most suitable for developing web applic
 
 While the framework can also be used to build far less complex applications, such as a blog or an animated element on a static page, it may be wise to consider using other frameworks like jQuery as the experience from both the developers as the users perspective may be suboptimal.
 
-**Assumptions:**\\
+== Assumptions ==
 In writing this documentation we assume that the reader will be a developer. The developer does not need to know much about Javascript, but is strongly advised to learn about the language and watch the videos.
 
-**Documentation Design**\\
+== Documentation Design ==
 The basic idea behind writing the documentation as you find it here is to provide the reader different ways of learning all important information and methods. People have different backgrounds and different ways of learning and consequently will have a different level of understanding of the underlying concepts, techniques and methods. The documentation should allow the reader to both skip parts that are already known and learn as much as desired about other lesser-known parts.

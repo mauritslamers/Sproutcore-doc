@@ -6,3 +6,6 @@ A conversation between erichocean and ku0n about building custom views
 [[notes:howtocustomrenderer | How to do a custom renderer]]
 
 [[notes:whatisdesign | what is .design() exactly]]
+
+[[notes:aboutappdesign | About application design and concepts]]
+A small lecture by Erich Ocean on the channel

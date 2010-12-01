@@ -1,16 +1,24 @@
 ====== Links ======
 
-Interesting links
+==== SproutCore related ====
 
 [[http://github.com/martoche/garcon]]
 
 [[http://github.com/etgryphon/sproutcore-ui]]
 
+[[http://saucelabs.com/blog/index.php/2010/10/sfse-video-test-your-sproutcore-apps-with-lebowski-framework/]]
+Talk about lebowski testing framework
+
+==== jQuery ====
 About jQuery. very practical when writing custom renderers\\
 [[http://eng.wealthfront.com/2010/10/jquery-right-way.html]] 
+
+==== Git ====
+
+[[http://www.gitready.com/ | git ready: learn git one commit at a time ]]
+
+==== Other links ====
 
 Thinking of your software as a butler is difficult but important:
 [[http://blog.garlicsim.org/post/1388741380/thinking-of-your-software-as-a-butler-is-difficult-but]]
 
-[[http://saucelabs.com/blog/index.php/2010/10/sfse-video-test-your-sproutcore-apps-with-lebowski-framework/]]
-Talk about lebowski testing framework

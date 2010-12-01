@@ -1,5 +1,7 @@
 ====== Tutorials ======
 
-At the moment we are focussing on the concepts and examples.
+[[tutorials:firsttime:start | First time tutorial]]
+
+At the moment we are focusing on the concepts and examples.
 
 Please use [[http://wiki.sproutcore.com]] for the moment

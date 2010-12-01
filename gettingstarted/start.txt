@@ -1,34 +1,46 @@
 ====== Getting Started ======
 
+==== 1. Install Ruby and RubyGems ====
+Install [[http://www.ruby-lang.org/en/downloads/|Ruby]] and RubyGems using the instructions for your platform.
+
+//Note: You won't be programming in Ruby. This is used only to run the development server, code generators and deployment packaging tools.//
+
+
+==== 2. Install Sproutcore using RubyGems ====
+Sproutcore is installed using Ruby's 'Gem' packaging system.
+
+<code>
+gem install sproutcore
+</code>
+==== 3. Verify the installation by creating a 'Hello World' application. ====
+<code>
+sc-init MyAppName
+cd myappname (on Windows, chdir myappname)
+sc-server
+</code>
+
+browse http://localhost:4020/myappname
+
+==== What Have I Just Installed? ====
+
 If you are new to SproutCore and want to start developing, you need to know a few things about the environment you will be using to build SproutCore applications.
 
 ===== Development versus Deployment =====
 
-Because SproutCore is a web application framework, the deployed application needs to run in the browser. For the user experience of the speed of your application load times are important. The way the application is delivered to the browser should therefore be optimised to load quickly. With a browser, the fastest load times are achieved when there are a minimum number of files, and the Javascript files are be minimised.((Minimising is a process to make the code as compacted as possible. One of the ways to do this is to strip all comments, spaces and new line characters.))
+As the deployed application needs to run in a browser, the application load time is important. Delivery from the server should therefore be both cacheable and as small as possible, which can be achieved by minifying((Minifying is a process to make the code as compacted as possible. One of the ways to do this is to strip all comments, spaces and new line characters.)) all code files and reduce their number.
 
-As you can imagine, a minified file is not the nicest environment to do development in. So, to allow both a nice development environment and a optimised result, SproutCore needs a development environment. This development environment is provided by the build tools.
+As you can imagine, coding in a minified file is far from optimal. So, to allow both a nice development environment and a optimised result, SproutCore needs a development environment. This development environment is provided by the build tools.
 
 ===== Build tools =====
 
-The SproutCore build tools (also known by the code name Abbot) supply an development environment to develop SproutCore applications. The build tools consist of a set of command-line tools ranging from creating a directory structure for your new application (or set of applications), creating a deploy-ready package, creating several files on the proper places inside the project directory structure and a server to enable you to interact with, test and debug your application under development inside a browser.
+The SproutCore build tools (also known by the code name Abbot) supply an development environment to create SproutCore applications. The build tools consist of a set of command-line tools ranging from creating a directory structure for your new application (or set of applications), creating a deploy-ready package, creating several files on the proper places inside the project directory structure and a server to enable you to interact with, test and debug your application under development inside a browser.
 
 ===== Installation =====
 
+<del>There are a few ways to install the SproutCore development environment.</del> [[gettingstarted:installation | More...]]
 
-===== Project directory structure =====
+Too confusing. Let's stick with one method, as described above.
 
-  * myProject/
-    * apps/
-      * myApplication/
-        * controllers/
-        * data_sources/
-        * fixtures/
-        * models/
-        * resources/
-        * tests/
-        * views/
-        * main.js
-        * core.js
-    * Buildfile
-    * frameworks/
-      * sproutcore/
+===== Git =====
+
+The SproutCore development team uses Git to manage the different versions and bugfixes to the source tree. There are quite a few links to learn about Git on the Internet. [[links:start | Links ]]

@@ -4,7 +4,7 @@ Javascript is a peculiar but remarkable programming language, both in history as
 
 Javascript is a Object Oriented functional language. While its syntax is derived from C and Java, the nature of the language much more resembles the classical functional languages as Lisp and Scheme.
 
-To help you to learn more about this language, we compiled a set of links we think will help you learn about this remarkable programming language.
+To help you to learn more about this language, we compiled a set of links we think will help you learn about this programming language.
 
 ===== Douglas Crockford =====
 
@@ -24,6 +24,3 @@ Set of lectures: [[http://yuiblog.com/crockford/]]
 ===== Other sources =====
 
 Javascript in 10 minutes: [[http://javascript.infogami.com/Javascript_in_Ten_Minutes]]
-
-
-
