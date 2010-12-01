@@ -1,0 +1,22 @@
+====== First time tutorial ======
+
+This tutorial is intended for developers who are trying out SproutCore for the very first time. It will guide you through all the steps needed to create an application. 
+
+While you might already know that helper applications exist, this tutorial will not use them. Instead, we will try to guide you by elaborate explanations of what to do exactly. The experience of doing everything manually will help you learn the preferred way to create applications and at the same time teach you a few basic concepts in a SproutCore application. These basic concepts will not be explained very thoroughly, but links to more elaborate explanations of the concepts at hand will be provided.
+
+We strongly suggest you not to copy and paste the given code. Not only will make typing the code learn you faster and better, but issues may arise from copying HTML to your editor.((This can include problems with error messages about improper syntax, while the syntax is actually correct. These kinds of issues are often caused by invisible or improper characters copied from the webpage.))
+
+=== Assumptions ===
+In this tutorial it is assumed your installation of SproutCore is working correctly. It is also assumed you don't know very much about working on the terminal. If you happen to be a complete novice with the terminal, you might first want to read [[http://kmt.hku.nl/~maurits/doku.php?id=terminal-en:start | this introduction]]. As the tutorial has been written with a Linux or Mac OSX (or any other type of Unix) user in mind, it might be that the procedure for Windows users can be a bit different.
+
+We don't want to promote one code editor over another, so feel free to use the code editor of your choice.((A remark that hopefully isn't necessary: applications like Microsoft Word or OpenOffice Writer are rather unsuitable for editing code.))
+
+[[tutorials:firsttime:projfolder | Step One: Project Folder]]
+
+[[tutorials:firsttime:resources | Step Two: Resources]]
+
+[[tutorials:firsttime:controllers | Step Three: Controllers]]
+
+[[tutorials:firsttime:fixtures | Step Four: Fixtures ]]
+
+[[tutorials:firsttime:queries | Step Five: Queries ]]

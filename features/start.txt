@@ -1,0 +1,24 @@
+Sproutcore brings together technologies which have common usage in the work of native api desktop applications.
+The loose-typed late-bound nature of Javascript allows wrapping these in a high-level api.
+Follow the links for a detailed discussion and example of each of these:
+
+  * Permissive licensing model
+  * Enhanced Model-View Controller structure
+  * Object-oriented implementing classical inheritance
+  * Client-side HTML Generation, completely agnostic with respect to server-side technology
+  * High-level cross-browser HTML View Components
+  * Key-Value Observers
+  * Language localizations
+  * Client-side intermediate datastore
+  * Lazy (just-in-time) data retrieval
+  * Themes
+  * Responders
+  * Statecharts
+  * Mixins for clean extensibility
+  * URL routes for bookmarkable application states and views
+  * A run-loop for high performance in single-threaded browser environments
+  * Code generators
+  * Unit-testing framework
+  * Facilities to modularize your code for re-use
+  * Zero-configuration development server
+  * Extensible packaging tools for optimized over-the-air delivery

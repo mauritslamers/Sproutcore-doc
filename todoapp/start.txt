@@ -1,0 +1,1 @@
+We will build a simple but complete Todo list manager that demonstrates many Sproutcore features.

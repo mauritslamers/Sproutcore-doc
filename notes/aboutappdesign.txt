@@ -1,0 +1,216 @@
+<code>
+erichocean: https://skitch.com/onitunes/rbspg/sproutcore-mvc-overview
+[22:33] erichocean: okay, I'll quickly go over this
+[22:34] erichocean: everyone should have the skitch and this PDF: https://files.me.com/erich.ocean/duqsww
+[22:34] geojeff: fallander: this would be a good time to start taking notes 
+[22:34] endash: i understand all of this i'm just not sure what you mean by the phrase "V property"
+[22:34] erichocean: I'm getting there
+[22:34] fallander: geojeff: yeah
+[22:34] erichocean: SC has a strict layered MVC
+[22:34] erichocean: V is over C is over M
+[22:34] geapi: erichocean: ok, ready
+[22:35] erichocean: M is a random graph with random connections between objects, defined by your schema
+[22:35] erichocean: C is a dag
+[22:36] erichocean: of controllers, which provide one specific "view" or "projection" of the random graph in your model layer
+[22:36] erichocean: V is a tree
+[22:36] erichocean: of view, which further constrains/projects the dag from the C layer
+[22:36] erichocean: turn to page two of the PDF
+[22:37] • endash turns to page two
+[22:37] erichocean: red lines are bindings
+[22:37] erichocean: never EVER observe an object from one layer in another layer
+[22:37] endash: if alex was here i'd make a harry potter joke
+[22:37] erichocean:
+[22:37] erichocean: as you can see, I have red lines (bindings) connecting the layers
+[22:38] erichocean: in addition, bindings are used to connect controllers to each other
+[22:38] erichocean: a controller with no lines going into it is a "root controller"
+[22:38] erichocean: you only have a few, typically
+[22:38] endash: are the thick red lines the same as the thin ones
+[22:38] erichocean: and everything else "flows" into the rest of the controllers using key-paths and bindings
+[22:38] erichocean: everyone follow so far?
+[22:39] geapi: nod
+[22:39] erichocean: take a look in the C layer at the circle labeled "Your Application Object"
+[22:39] erichocean: that's where all of the code that makes your app unique goes
+[22:39] hasrb joined the chat room.
+[22:39] erichocean: (other than view code)
+[22:39] erichocean: (and you schema, which goes in the model)
+[22:40] erichocean: DON'T PUT CUSTOM CODE IN THE CONTROLLERS
+[22:40] erichocean: that's set and forget code
+[22:40] erichocean: you're just configuring pre-built controllers and bindings
+[22:40] jeremi left the chat room. (Quit: Page closed)
+[22:40] erichocean: (occasionally, you'll tweak a controller with new code, but it should be conistent with this overall design)
+[22:41] erichocean: okay, on to the skitch
+[22:41] endash: the application object isn't a controller?
+[22:41] erichocean: no
+[22:41] erichocean: I usually use the object defined in core.js
+[22:41] endash: oh gotcha
+[22:41] erichocean: you can create more (aka use modules) but the idea is the same
+[22:42] erichocean: the skitch I posted is the basic run loop for the app
+[22:42] erichocean: there are four arrows between the view-controller-model layers
+[22:42] erichocean: if you squint, they form a "V"
+[22:42] erichocean: that's where the V in V-property comes from
+[22:43] endash: ahhh
+[22:43] erichocean: events come from the run loop into the view layer
+[22:43] geapi: why is the first one dashed?
+[22:43] erichocean: bad graphic
+[22:43] erichocean: this is actually part of a powerpoint
+[22:43] erichocean: I did at Apple, and I walk through each phase in a new slide
+[22:43] geapi: so it should be solid as the other ones?
+[22:43] erichocean: yes
+[22:44] erichocean: okay, so there are five possible points on the v
+[22:44] erichocean: two in the view layer, two in the controller, and one in the model
+[22:44] erichocean: does everyone see that?
+[22:44] • endash nods
+[22:44] erichocean: this is the V-property: you can only write specific kinds of code at specific points
+[22:45] endash: ahh
+[22:45] erichocean: for instance, you would do event handling at point 1 in the V layer
+[22:45] geapi: sigh
+[22:45] erichocean: but you would do rendering in point 5 in the V layer
+[22:45] erichocean: you would NOT do rendering at point 1 in the V layer
+[22:45] erichocean: (1 being the first time we enter the view, 5 being the last point on the V)
+[22:46] geapi: gotcha
+[22:46] geapi: was about to ask that
+[22:46] erichocean: views don't modify the model layer
+[22:46] erichocean: neither do the points in the controller layer
+[22:46] erichocean: typically, a view will trigger an action call into your Core object
+[22:46] geapi: silly question: how do I know I'm at point 5 in the v layer?
+[22:47] geapi: and not point 1
+[22:47] erichocean: your Core object will check the call (validate it), gather params from the controllers, and call API in the model layer that "dose" the action
+[22:47] erichocean: great question
+[22:47] erichocean: KVO occurs only in 4 and 5
+[22:48] fallander: to create an app i use "sc-gen app" .. is there a way to remove an app with command or should i just delete the folder?
+[22:48] erichocean: also, render() is only called in 5
+[22:48] erichocean: so basically, you need to keep the mental model in mind
+[22:48] geapi: so I don't "need" to know it, the framework call things for me at the right time?
+[22:48] erichocean: the V-property is mind
+[22:48] erichocean: yes and no
+[22:48] endash: if you're only supposed to modify your models in your application object then why does an object controller interface directly with the record
+[22:48] erichocean: you can *easily* violate it by writing your own code
+[22:48] geapi: if they are in the right place, I mean
+[22:49] erichocean: endash: shitty API
+[22:49] erichocean: I have argued endlessly to take it out
+[22:49] erichocean: Charles likes it because it makes demos easier
+[22:49] geojeff: fallander: just delete
+[22:49] geapi: fallander: rm -rf
+[22:49] endash: can you give us a simple example of the alternative
+[22:50] fallander: okay
+[22:50] endash: would it be like YourApp.setNameForRecord ?
+[22:50] erichocean: oh
+[22:50] erichocean: so, KVC is also okay
+[22:50] erichocean: e.g. you can do myRec.set('name', "to this") in your controller layer
+[22:50] erichocean: KVC goes "down" the stack
+[22:50] geapi: erichocean: can you point to some apps that follow the V-property as good as possible? What about the Tasks app?
+[22:50] endash: gotcha
+[22:50] erichocean: and when it hits the bottom, it "bounces" back up via KVA
+[22:51] erichocean: *KVO
+[22:51] erichocean: geapi: the tasks app is probably about as close as you'll get
+[22:51] erichocean: Eloqua's app follows this very well
+[22:51] geapi: yeah, it seems very clean
+[22:51] erichocean: Suvajit was tough this approach
+[22:51] erichocean: *taught
+[22:51] endash: see this is why i prefer low level stuff
+[22:52] erichocean: and he tried to follow it as best he could
+[22:52] erichocean: (for a first app)
+[22:52] geapi: who did he learn from?
+[22:52] erichocean: me
+[22:52] geapi: geapi: smiles
+[22:52] rklancer: "don't put custom code in the controllers"? That's where all my custom code is
+[22:52] endash: biggest debate we get into is whether to use semicolons and bracket style
+[22:52] erichocean: and the guys at Eloqua, who I also trained
+[22:52] rklancer: seriously
+[22:52] erichocean: rklancer: I know, everyone does it at first
+[22:52] erichocean: it seems like such a natural place
+[22:52] erichocean: or they've used Rails
+[22:53] geapi: so how do I get it out there?
+[22:53] rklancer: Professor Ocean, where do *you* put it?
+[22:53] endash: what's the sort of thing that someone might mistakenly put into a controller that should be on the application object
+[22:53] rklancer: that's as far as I got btw
+[22:53] geapi: I think he said in the app object
+[22:53] erichocean: I do any model layer manipulation down in the model
+[22:53] erichocean: and I have "forwarding" calls in the app layer
+[22:53] erichocean: that (a) gather the params, and (b) call into the model layer
+[22:54] erichocean: http://erichocean.com/training/index.html
+[22:54] peterwagenet: I put a lot of my application code in a statechart
+[22:54] erichocean: in the course outline
+[22:54] erichocean: peterwagenet: that's the way to write the app object
+[22:54] geapi: wow, I just get the feeling that you can do more harm than good with SC if you don't know it
+[22:54] erichocean: yep
+[22:54] erichocean: but it's awesome if you use it right
+[22:54] peterwagenet: geapi: maybe, but I wouldn't be too worried
+
+[22:54] peterwagenet: when I wrote my first Rails app for instance, it was awful
+[22:55] erichocean: see the "two fundamental tasks..." line
+[22:55] peterwagenet: but it was still better than writing in PHP
+[22:55] erichocean: that's what your "app" object does
+[22:55] erichocean: and the best way to write the app object is using a statechart
+[22:55] dekroning joined the chat room.
+[22:55] geapi: peterwagenet: yeah, Rails has that too, and it can be so elegant
+[22:55] erichocean: the second task is where you call into your model layer
+[22:56] erichocean: a couple of notes on the V-property:
+[22:56] erichocean: 1. sometimes the v is short-circuited in the view; this happens when the view doesn't call an action
+[22:56] geapi: it would be nice to see that approach explained on say the todos sample app
+[22:56] geapi: how to build that app based on this
+[22:57] erichocean: 2. sometimes the v is short-circuited in the controller layer, this happens when your app object doesn't update the model
+[22:57] erichocean: 3. sometimes steps 1 and 2 of the V DO NOT OCCUR
+[22:57] erichocean: this happens when you receive data from the network
+[22:58] erichocean: the latter reason is one of the main reasons to religiously follow the V-property
+[22:58] ku0n left the chat room. (Remote host closed the connection)
+[22:58] erichocean: if you update your view ONLY in step 1, your view won't update when data comes in from the network
+[22:58] babakofi left the chat room. (Quit: Leaving.)
+[22:58] erichocean: looking at the V, that makes sense, right?
+[22:59] geapi: yes, that's what the binding does, right?
+[22:59] erichocean: similarly, if you man-handled your controllers in step 2 instead of using bindings and relying on KVO, then when data comes in from the network, your controllers won't reflect the underlying data
+[22:59] erichocean: right
+[22:59] erichocean: but you'd be shocked at how often people break this rule!
+[23:00] geapi: geapi: is looking in the mirror
+[23:00] erichocean: well, i hope this helped guys
+[23:00] geapi: so, how do you walk the line between over engineering and getting something done then?
+[23:00] geapi: Thanks a bunch, this was hugely helpful!
+[23:01] erichocean: this is the fastest way, because it saves huge amount of time on bugs
+[23:01] erichocean: statecharts are also slower at first, but similarly win overall
+[23:01] erichocean: it's also much easier to extend and update (without introducing bugs)
+[23:01] erichocean: and you can build HUGE apps this wake (c.f. Eloqua)
+[23:02] rklancer: I'm trying to think whether and how this applies
+[23:02] babakofi joined the chat room.
+[23:02] essh joined the chat room.
+[23:02] mauritslamers: erichocean: Thanks a lot! I recorded your small lecture to be able to read back later 
+[23:02] geapi: and how do you sell this to the business owners?
+[23:02] rklancer: the notion of an "app object" doesn't seem to be explored much in the sproutcore docs
+[23:02] mtappenden joined the chat room.
+[23:02] pjmorse: Is this channel logged anywhere?
+[23:02] geojeff: erichocean: yes, thanks!
+[23:03] rklancer: I felt definitely encouraged to put code in one of controllers, views, or models; eventually states
+[23:03] babakofi1 joined the chat room.
+[23:03] mauritslamers: pjmorse: don't know about the channel, but this conversation has been recorded 
+[23:03] babakofi1 left the chat room. (Client Quit)
+[23:03] erichocean: rklancer: definitely code goes in the model
+[23:03] erichocean: and you do write custom views
+[23:03] erichocean: but it should all be within the overall framework I described
+[23:03] erichocean: SC works *best* when you use it the way I described
+[23:04] rklancer: sure. I write views that observe controllers in order to add sets of child views, etc
+[23:04] erichocean: yeah
+[23:04] rklancer: no
+[23:04] rklancer: yeah
+[23:04] geojeff: hehe
+[23:04] rklancer: including "view controllers" that aren't backed by a model
+[23:04] rklancer: but just exist to be observed by views
+
+[23:04] erichocean: that's fine
+[23:04] geapi: wow, I feel like I need to sit back and start my app from scratch, after some Whiskey
+[23:04] erichocean: that's basically just an app model
+[23:05] erichocean: *grr* app *module*
+[23:05] erichocean: it's fine to break up a larger app with smaller subsets of code that handle a specific set of views on screen
+[23:05] erichocean: but they would logically reside in that big App object circle
+
+
+[23:04] erichocean: that's fine
+[23:04] geapi: wow, I feel like I need to sit back and start my app from scratch, after some Whiskey
+[23:04] erichocean: that's basically just an app model
+[23:05] erichocean: *grr* app *module*
+[23:05] erichocean: it's fine to break up a larger app with smaller subsets of code that handle a specific set of views on screen
+[23:05] erichocean: but they would logically reside in that big App object circle
+[23:07] erichocean: the larger you app is, the more important it is that the V-property is followed
+[23:07] geapi: do you break the app object into modules like in Ruby/Rails?
+[23:07] babakofi left the chat room. (Ping timeout: 276 seconds)
+[23:07] erichocean: geapi: occasionally
+[23:07] erichocean: there's not as much use for that, but somethings can be modularized like that
+</code>

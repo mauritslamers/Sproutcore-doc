@@ -1,0 +1,33 @@
+====== Resources ======
+
+In the previous part of our tutorial we created the main folder layout for our new application as well as the main startup files ''core.js'' and ''main.js''. This is not enough however to get our application started, as a SproutCore application will generate all HTML on the client side. We did not define what we actually wanted to generate however.
+
+The development environment expects this information to be present inside a folder called ''resources''. As this folder doesn't exist yet, we first need to create it:
+
+<code>
+mkdir resources
+cd resources
+</code>
+
+Inside this folder we need to create three files:
+
+<code erb loading.rhtml>
+<% content_for :loading do %>
+<% # Any HTML in this file will be visible on screen while your page loads
+   # its application JavaScript.  SproutCore applications are optimized for 
+   # caching and startup very fast, so your users will often only see this 
+   # content for a brief moment on their first app load, if at all.
+%>
+<p class="loading">Loading...<p>
+
+<% end %>
+</code>
+
+<code javascript mainpage.js>
+
+</code>
+
+<code css mainpage.css>
+
+
+</code>

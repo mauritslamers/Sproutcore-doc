@@ -1,0 +1,67 @@
+====== Project Folder ======
+
+The first thing we will need to do is creating our project folder. In your home folder we assume you have  a folder called Development. We will start with creating our project folder inside this folder by giving the following commands at the terminal prompt.
+
+<code>
+cd Development
+mkdir myProject
+cd myProject
+</code>
+
+We now created and entered our project folder. One of the first things to do next is creating a file called ''Buildfile''. This file will be used by the SproutCore development environment to pull in all the necessary bits our application will need. The contents of this file for our new project is shown below.
+
+<code ruby Buildfile>
+# myProject Buildfile
+
+# initial buildfile information 
+config :all, :required => :sproutcore
+</code>
+
+This bit of information will tell the development environment we will need the SproutCore framework loaded before our own application is loaded.
+
+Next we need to create a folder called 'apps'. 
+
+<code>
+mkdir apps
+cd apps
+</code>
+
+We now created and entered the apps folder. In this folder we will put all applications the current project will contain. As we only want to build a single application, we will only have one folder inside this apps folder, called myproject.
+
+<code>
+mkdir myproject
+cd myproject
+</code>
+
+This application folder will contain all files needed for our application. 
+Inside this folder we will create two files forming the basis for our application: ''core.js'' and ''main.js''.
+
+<code javascript core.js>
+MyProject = SC.Application.create({
+
+  NAMESPACE: 'MyProject',
+  VERSION: '0.1.0',
+
+  store: SC.Store.create().from(SC.Record.FIXTURES)
+
+}) ;
+</code>
+
+The ''core.js'' file defines your application and offers you a place to define certain basic parts of your application, like global variables or singleton objects. We put in a store here, which we will need later to be able to handle data inside the application.
+
+<code javascript main.js>
+MyProject.main = function main() {
+
+  MyProject.getPath('mainPage.mainPane').append() ;
+
+} ;
+
+function main() { Meetme.main(); }
+</code>
+
+The ''main.js'' file defines the main function of your application. This function is called to start your application.
+
+These two files are still not enough to get something you can look at. They are essential though for every application.
+Let's continue building our application by creating a resources folder in the next part of our tutorial.
+
+[[resources | First Time Tutorial Part 2: Resources]]

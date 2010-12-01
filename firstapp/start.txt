@@ -1,0 +1,4 @@
+Let's build a simple Sproutcore app. We'll do this by hand and examine the purpose of each file to better understand the structure of a Sproutcore app.
+While the app is simple, we'll use several key technologies from the framework.
+
+Suggest we create something using an observer for this.

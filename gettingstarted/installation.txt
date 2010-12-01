@@ -1,0 +1,26 @@
+====== Install by RubyGem ======
+
+
+
+====== Install by Git Clone ======
+
+
+
+===== Project directory structure =====
+
+  * myProject/
+    * apps/
+      * myApplication/
+        * controllers/
+        * data_sources/
+        * fixtures/
+        * models/
+        * resources/
+        * tests/
+        * views/
+        * main.js
+        * core.js
+    * Buildfile
+    * frameworks/
+      * sproutcore/
+

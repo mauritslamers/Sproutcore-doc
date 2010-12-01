@@ -1,0 +1,8 @@
+====== When You Need Help ======
+SproutCore has a active community that's willing to help. If you have questions, comments, suggestions or want to contribute, here are the best places to start:
+
+  * **The mailing list**: [[http://groups.google.com/group/sproutcore|The SproutCore mailing list]] is the best place to reach everyone. It's the best place to ask for help with specific problems, or to see if this problem has been solved by others. For best results, try to include code examples.
+  * **IRC**:  Using the [[wikipedia.org/wiki/Internet_Relay_Chat#Clients|irc chat software of your choice]], join the **#sproutcore** channel on **irc.feenode.net** — Many experienced developers hang out here, including many of the members of the core team.
+  * **Bug Reporting**: Look at [[https://github.com/sproutcore/sproutcore/issues|Sproutcore Bugs]] if you think you've found a bug in Sproutcore and want to report it, or see if it's already been reported.
+  * **The developer's mailing list**: [[http://groups.google.com/group/sproutcore-dev|The SproutCore Development mailing list]] for discussion of the sproutcore development internals.
+  * **Source Code**: [[https://github.com/sproutcore/sproutcore|Full source code]] is available for downloading, examination and hacking.

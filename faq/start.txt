@@ -1,0 +1,7 @@
+Some answers to the questions we see most often in the mailing list and on the IRC channel:
+  * Is Sproutcore production-ready?
+  * Does Sproutcore support mobile platforms?
+  * Can I use my existing web pages with Sproutcore?
+  * Is this Apple's software?
+  * Does Sproutcore work with PHP, Django, Rails (insert your preferred server-side framework here)?
+  * What are the advantages compared to jQuery, Sammy, my own javascript framework?
