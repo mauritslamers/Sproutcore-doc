@@ -1,0 +1,10 @@
+<code javascript>
+render: function(context, firstTime){
+  context.push(
+            '<div id="something" class="some-class">',
+              '<div id="some-other-div" class="some-other-class">',
+                someVariable,
+              '</div>',
+            '</div>');
+
+</code>

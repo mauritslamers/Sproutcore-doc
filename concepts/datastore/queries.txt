@@ -1,8 +1,13 @@
 ====== Queries ======
 
 Queries form a special way of finding data in your store as they allow a SQL like approach to searching.
+A query will always return a RecordArray.
 
 ===== Local queries =====
+
+Local queries are queries done on data that resides in the store. If necessary, the Store will automatically retrieve extra data.
+
+Every query will cause the data sources fetch function to be called.
 
 
 ===== Remote queries =====

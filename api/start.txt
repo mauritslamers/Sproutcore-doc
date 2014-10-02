@@ -1,1 +1,3 @@
-The Sproutcore API. We'll need to start with the jsdocs-generated pages.
+The SproutCore API documentation can be found at [[http://docs.sproutcore.com|docs.sproutcore.com]].
+
+The API docs are auto-generated from comments in the SproutCore source code. If you would like to update them, you can update them in the source and submit a pull request.

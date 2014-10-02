@@ -1,1 +1,9 @@
 Placeholders
+
+See also [[concepts:start | Concepts]]
+
+=== Take apart ===
+
+Maurits Lamers is taking apart SC per framework. You can find the notes here
+
+[[takeapart:runtime | Runtime]]

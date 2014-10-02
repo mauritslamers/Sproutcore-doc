@@ -2,16 +2,16 @@ Sproutcore brings together technologies which have common usage in the work of n
 The loose-typed late-bound nature of Javascript allows wrapping these in a high-level api.
 Follow the links for a detailed discussion and example of each of these:
 
-  * Permissive licensing model
+  * Permissive licensing model using the[[http://en.wikipedia.org/wiki/MIT_License| M.I.T. license]], unfettered commercial usage allowed.
   * Enhanced Model-View Controller structure
   * Object-oriented implementing classical inheritance
   * Client-side HTML Generation, completely agnostic with respect to server-side technology
-  * High-level cross-browser HTML View Components
+  * High-level cross-browser HTML View Components [[concepts:views:|...]]
   * Key-Value Observers
   * Language localizations
   * Client-side intermediate datastore
   * Lazy (just-in-time) data retrieval
-  * Themes
+  * Themes. A default style but custom themes can be created to match any design or branding requirements.
   * Responders
   * Statecharts
   * Mixins for clean extensibility

@@ -1,0 +1,12 @@
+====== The create function ======
+
+In many ways the create function resembles the extend function, in the sense that you can add as many mixins as you want to the parameter list, as long as you end with an object literal.
+
+The syntax is:
+<code javascript>
+var instance = sourceClass.create(mixin,otherMixin,{ object literal });
+</code>
+
+==== Example ====
+
+<embed examples:create />

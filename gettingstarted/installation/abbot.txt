@@ -1,0 +1,31 @@
+====== Installing SproutCore using Abbot ======
+
+===== Mac & Linux =====
+
+(Linux only) Install Ruby and RubyGems 
+Install [[http://www.ruby-lang.org/en/downloads/|Ruby]] and RubyGems using the instructions for your platform.
+
+==== Standard build tools ====
+
+//Note: You won't be programming in Ruby. This is used only to run the development server, code generators and deployment packaging tools.//
+
+==== 2. Install Sproutcore using RubyGems ====
+Sproutcore is installed using Ruby's 'Gem' packaging system.
+
+<code>
+gem install sproutcore
+</code>
+
+==== 3. Verify the installation by creating a 'Hello World' application. ====
+<code>
+sc-init MyAppName
+cd myappname (on Windows, chdir myappname)
+sc-server
+</code>
+
+browse http://localhost:4020/myappname
+
+
+===== Windows =====
+
+Yet to come

@@ -1,0 +1,1 @@
+The SproutCore Guides are a series of tutorials on basic and advanced SproutCore concepts. You can find them at [[http://guides.sproutcore.com|guides.sproutcore.com]].

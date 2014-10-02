@@ -1,0 +1,48 @@
+Notes:
+
+====== Model View Controller ======
+
+=== MVC paradigm in SC ===
+
+The way the MVC paradigm is implemented in SC is very strict (man-in-the-middle approach).
+This means that there are three separate layers: Model, Controller and View.
+
+**Model** The Model layer contains the data and all operations on that data.
+
+**Controller** The Controller layer contains all controllers. There will often be one or more root controllers which makes your app come to life. The controllers use bindings to communicate.
+
+**View** The View layer contains all the views, which often resemble a tree.
+
+Communication between the layers should be done using Bindings. Most relations between controllers and controllers, and views and views are often also Bindings. 
+A binding must only cross one layer boundary, so a View must not be bound to a Model in any way.
+This should be done using a controller. The controllers content is set with the model, and the view is updated using a binding to the controller.
+
+=== The Application Object / Controller ===
+
+Many people tend to put the application logic inside controllers. This results in the application logic to be spread throughout the entire application. This is really hard to debug, and moreover will cause problems regarding state.
+
+
+====== V prop (propagation of events through SC) ======
+
+The way events propagate in SC is different than that of the browser. SC captures all events for all view elements it creates and passes them through the SC app using the runloop.
+If something happens outside SC's control in some way (like xhr stuff returning from the server, or custom views) you need to wrap SC.RunLoop around your actions by doing SC.Runloop.begin() at the top and SC.RunLoop.end() after your last action to make sure SC will update everything changed by your actions.
+
+The way events are dealt within SC consists of three layers mentioned above. 
+The first layer is the View layer, the layer often receiving the event (for example onClick).
+The first step here is that this triggers an event handling function inside the view. The view will most likely have an action bound to this event, so it will pass on the event by triggering the action. 
+
+This action is defined on a controller, so the second step is in the controller layer. The action will most likely have to do with some action towards data, and will use Key Value coding to access or change the Model, which takes the event to the next level, the Model Level. (Step three).
+
+When something changes, this will require the other layers to synchronize with the model, so the event bubbles up again through the controller layer (step 4), back up to the View layer, and cause a redraw of the view. (step 5).
+When the action has been denied, for example because the model property was read only, events 4 and 5 do not fire.
+
+==== states / state charts / Ki ====
+
+Every application has states. While for some applications you can build stuff otherwise, using state charts to build a SC is almost a must, especially when the app can become a bit complicated.
+
+If the application is not conceived from the point of the states, what often happens is that code inside controllers will start checking values of certain properties to decide what to do in what circumstance. With complicated applications this often leads to loads of nested if statements, which are hard to debug and make it really hard to extend applications.
+
+
+
+
+=== testing state charts ===

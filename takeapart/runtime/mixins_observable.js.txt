@@ -1,0 +1,64 @@
+Observable.js
+
+As the bindings depend primarily on observers, the observable mixin is the first logical place to continue.
+
+
+
+SC.Observable is mixed in with SC.Object, which is the root of all objects in SC.
+
+SC.Observable.isObservable defaults to true, to tell that the current object can be observed
+
+SC.Observable.automaticallyNotifiesObserversFor is a function which returns true by default. This function can be used to specifically turn of notification for certain properties
+
+SC.Observable.get is the default function to get a value of a property. If a property is cacheable, the value will be retrieved from the cache. If a property name doesn't exists, it will call the unknownProperty function on the object and return the value the unknownProperty function returns.
+
+SC.Observable.set is the default function to set a value of a property. It will do a lookup with automaticallyNotifiesObserversFor to check whether the change should be notified. 
+If the change should not be notified, the caches of the keys that depend on this property will be cleared. it calls _kvo_computedCachedDependents to find the cached dependents.
+For every change, set will call this.propertyWillChange, then set the value, then call this.propertyDidChange. If the property is a function, and the value is different from the cache, or the cache doesn't exist, it will then call the property function with key and value, update the cache. If the key is undefined, unknownProperty function will be called instead.
+
+SC.Observable.unknownProperty default implementation either returns the value (which is undefined if plainly retrieved) when called by get, and if the key is not undefined, a property is created with the given value.
+
+SC.Observable.beginPropertyChanges is a function which only ups the internal property _kvo_changeLevel.
+It describes itself as the way to do multiple changes by suspending the change notifications. How it does this, is not obvious from the default implementation. perhaps it might get overridden later (SC.Object?)
+
+SC.Observable.endPropertyChanges will lower the internal property _kvo_changeLevel by one, and will notify the observers if _kvo_changeLevel is lower or equal to 0, there are changes, and the global notification system is not suspended.
+
+SC.Observable.propertyWillChange is by default an empty function
+
+SC.Observable.propertyDidChange is different between SC 1.4.5 and SC Master. The main difference is the chain observer.\\
+//SC 1.4.5 propertyDidChange// will up the _kvo_revision property. then it clears the caches if needed for both the value cache (_kvo_cache.cacheKey) as well as the dependencies. It then calls this._kvo_computeCachedDependentsFor with the property name, probably to get the dependent keys to also clear the cache for those. Now it becomes obvious what _kvo_changeLevel actually is: an inner state property preventing the notification of changes inside the object. When either the _kvo_changeLevel is larger than 0, or notification is suspended system wide, store the changes in _kvo_changes, and when the notification is suspended system wide, notify SC.Observers that this object has pending changes.
+If the _kvo_changeLevel is 0 or notification is not suspended system wide, call this._notifyPropertyObservers for this key.\\
+//SC Master propertyDidChange// adds to SC 1.4.5 chains: it will first get the chains, call this.beginPropertyChanges, then call notifyPropertyDidChange on every chain, then calls endPropertyChanges. The rest of the function is essentially the same.
+
+SC.Observable.registerDependentKey is a function to register dependent keys. It is called automatically by the computed property .property() function, but can also be used to register other keys, for example during init. if this._kvo_dependents doesn't exist, make it into an object containing arrays. one _kvo_dependents for the entire object, where every property can contain a list of property names.
+Here also a difference between SC 1.4.5 in that SC Master adds support for property chains. (property chain is having a computed property .property('item.prop') ). SC Master registerDependentKey will call SC._PropertyChains to create a chain.
+
+__SC Master has a few extra methods SC 1.4.5 doesn't have, related to the property chains:__
+
+SC Master SC.Observable.registerDependentKeyWithChain calls this._chainsFor with the current property, then adds the given chain to the chains variable
+
+SC Master SC.Observable.removeDependentKeyWithChain will remove the given chain from chains, and remove the _kvo_property_chains[property] chain when it is empty.
+
+SC Master SC.Observable._chainsFor will return an empty CoreSet when there is no chain yet for the current property, or the chain belonging to the current property.
+
+// Side note: this only seems to be in here because of supporting templates. The chain properties support is a **bad** idea. The architecture of SC is controller based, meaning that you lay out a grid of controllers for an application in order to get the right sort of notification. Chaining properties like this feels like bypassing controllers. While this might be fine for just displaying, if you start editing, you get into real trouble. //
+
+__end of extra functions in SC Master for now.__
+
+
+SC.Observable._kvo_addCachedDependents is a function used by computeCachedDependents. 
+It checks whether a specific computed property is cacheable, and if yes, adds it to the queue.
+This function is a typical JS function in the sense that it doesn't return things, but just adds things to one of the arguments. If this would be only used by computeCachedDependents, why not make it an inner function? (might also be faster)
+
+SC.Observable._kvo_computeCachedDependentsFor is a function used by .set to determine which cached dependent keys should be cleared. it uses SC._TMP_SEEN_SET to temporarily store the seen properties in. then it runs _kvo_addCachedDependents, then clears SC._TMP_SEEN_SET again.
+
+SC.Observable._kvo_for is a function which inits _kvo_cloned with an object. the function is called with a kvoKey and a type. if there is no this[kvoKey] it is created with either an empty array, or a new instance of type, and _kvo_cloned[kvoKey] is set to true. if there is a this[kvoKey] but no _kvo_cloned entry for the current property the property is copied. Why this is done is completely unclear (and undocumented too), except that it is put in the OBSERVERS part of the code.
+
+SC.Observable.addObserver is called with a key, a target, a method and a context. If there is no method, target is seen as method, and target will be the current object. if the method is given as string, it is looked up on the target. \\
+If the key contains a dot, a ChainObserver is created, having the masterTarget as the current target, and the method as the current method. Then _kvo_for is called with the result of SC.keyFor('_kvo_chains', key) (which is like concat, but then cached) and the result is pushed the observer chain. (why?)\\
+if the key doesn't contain a dot, then first is checked whether the key starts with an @ (for @each or @sum etc) and if it is, the value is retrieved, but not used. The description says that this configures the dependent keys if needed, but how this works exactly unclear. Then the kvoKey is created by using SC.keyFor. Then _kvo_for is called with the key and SC.ObserverSet, and then the target, method and context are added to this set. Also _kvo_for is called with _kvo_observed_keys and SC.CoreSet and added the key. 
+_kvo_for is used as a cloning machine, in the sense that when it is called with a class, a new one is created and put on the current object with the key given. if no class is given, it defaults to an array.
+
+In both cases is checked whether a didAddObserver function exists, and if it does, it is called with the key, target and method.
+
+

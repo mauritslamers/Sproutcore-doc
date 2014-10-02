@@ -1,0 +1,14 @@
+======= Installing SproutCore ======
+
+There are a couple of ways of installing SproutCore. The way depends of course on what platform you want to install SproutCore, but also what kind of build tools you want to install.
+Currently there are two sets of build tools: 
+  * abbot: runs in Ruby
+  * garçon: runs in Node-JS
+
+[[gettingstarted:installation:abbot | Install Sproutcore with Abbot ]]
+
+[[gettingstarted:installation:garcon | Install Sproutcore with Garçon ]] 
+
+
+
+

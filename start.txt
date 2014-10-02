@@ -1,3 +1,11 @@
+// Welcome to this SproutCore wiki. The main purpose for this wiki is to contain extra bits of documentation that doesn't fit the format of http://docs.sproutcore.com or http://guides.sproutcore.com, most specifically documentation that explains how things work and why they work that way.
+
+Feel free to join us in this effort by registering here by using the tool icon menu above, choose login and use the register link. Thanks in advance for helping out!//
+
+---- 
+\\
+
+
 **SproutCore** is a framework written in Javascript for producing fast, reliable and maintainable web applications with demanding interactivity and state-management requirements. It is a framework designed to create applications that resemble desktop applications, but run inside a browser.
 
 This is accomplished using a number of technologies:

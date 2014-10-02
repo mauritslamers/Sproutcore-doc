@@ -1,0 +1,8 @@
+.htaccess
+cache/*
+locks/*
+meta/*
+playground/*
+wiki/*
+index/*
+recent.txt

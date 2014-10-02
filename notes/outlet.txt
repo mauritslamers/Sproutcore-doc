@@ -1,0 +1,22 @@
+<code>
+[16:21] Fodoj: doesnt Outlet used for some child view?
+[16:22] erichocean: https://github.com/erichocean/otherinbox/blob/master/apps/other_inbox/english.lproj/body.js#L26
+[16:22] erichocean: basic rule: never use .getPath() with a page object
+[16:22] erichocean: MyApp.myPage.get('key'); // <= don't use getPath here
+[16:23] erichocean: if you find yourself WANTING to use getPath here, go make an outlet in the page and use .get()
+[16:23] DofLeFou joined the chat room.
+[16:23] __tosh left the chat room. (Ping timeout: 260 seconds)
+[16:23] cwingate joined the chat room.
+[16:23] erichocean: rational: view hierarchies change frequently
+[16:23] erichocean: code should be insulated from these changes as far as possible
+[16:24] erichocean: code like this is not insulated: MyApp.myPage.getPath(''mainPane.wrapper.content.mainSplit.bottomRightView.split.bottomRightView.split.topLeftView.messages.contentView');
+[16:24] dannluciano joined the chat room.
+[16:24] erichocean: but code like this is: MyApp.myPage.get('messageList');
+[16:24] erichocean: because I can update the outlet in the page to always point to the message list 
+[16:24] topherfangio: erichocean: Page or Pane? I just asked Geoffrey and I believe he said Pane...
+[16:24] eonwe: any idea on what version of sproutcore demo.sproutcore.com is running? I should probably be able to find from the source code but unfortunately I do not know where from
+[16:25] Fodoj: so outlet is like a short name of huge path? 
+[16:25] erichocean: topherfangio: I saw that
+[16:25] erichocean: should be "page", and no getPath()
+
+</code>

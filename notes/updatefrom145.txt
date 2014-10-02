@@ -1,0 +1,19 @@
+Replacing Ki
+
+As Ki has been integrated into SC as SC.Statechart, the only thing to do here is replace the "Ki" name for SC in all files. The following bash script can be very useful:
+
+<code bash>
+  for file in `find ./* -name "*js"`; do
+    sed -i.old s/Ki/SC/ $file
+    rm $file.old
+  done
+</code>
+
+(I didn't really get how to replace inline without creating a backup file, that is why .old and the removal of the old file)
+Before running: MAKE SURE YOUR FILES HAVE A BACKUP! (a git repo can be very useful for this)
+
+As a one liner:
+
+<code bash>
+  for file in `find ./* -name "*js"`; do sed -i.old s/Ki/SC/ $file; rm $file.old; done
+</code>

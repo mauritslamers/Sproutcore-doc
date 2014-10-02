@@ -1,0 +1,22 @@
+thanks to [[https://gist.github.com/DaveDuchene]]
+
+<code javascript>
+
+AdminUi.LoadingState = SC.State.extend({
+  
+  enterState: function() {
+    SC.MODULE_INFO['arcGis'] = { scriptURL: 'https://serverapi.arcgisonline.com/jsapi/arcgis/?v=2.4' };
+    SC.Module.loadModule('arcGis', this.arcGisLoaded);
+  },
+
+  arcGisLoaded: function() {
+    dojo.require('esri.map');
+    // ...
+    dojo.require('dijit.Toolbar');
+
+    AdminUi.statechart.gotoState('readyState');
+  }
+
+});
+
+</code>

@@ -1,0 +1,114 @@
+binding.js
+
+A binding is essentially an object sitting on top of two references between two objects.
+
+
+This has two descriptions, one for SC 1.4.5 and one of master, to understand the differences
+
+====== SC 1.4.5 ======
+
+
+binding.js starts with a few definitions, that have to do with benchmarking and logging.
+
+Then there are a few placeholders for multiple, null and empty values.
+
+SC.Binding.beget runs SC.beget on itself, to create a new object with itself as prototype.
+if SC.Binding.beget is called with a from path, it uses the from method on itself to set the from path.
+
+SC.Binding.builder seems to be a kind of wrapper for SC.Binding.beget()
+
+SC.Binding.from returns a new binding instance if needed and sets three property values:
+ - _fromPropertyPath with the given property path
+ - _fromRoot with the given root (object)
+ - _fromTuple with null
+
+SC.Binding.to returns a new binding instance if needed and sets three property values:
+ - _toPropertyPath with the given property path
+ - _toRoot with the given root (object)
+ - _toTuple with null
+
+SC.Binding.connect sets the act of connecting from and to in action, but the actual connection is made at the end of the runloop. It sets a few properties
+ - isConnected to true;
+ - _connectionPending to true, as it is not actually connected yet
+ - _syncOnConnect to true
+and it adds itself to SC.Binding._connectQueue
+
+SC.Binding._connect is the actual act of connecting the binding.
+first the from side is taken, and an observer is added to the from side. Only the data needed to make the observer is stored. 
+the same is done for the to side, but only if the binding is not a SC.Binding.oneWay (binding._oneWay)
+if this._syncOnConnect is set, the sync method is executed on the binding.
+For both from and to side a callback function reference is given to be called when either value changes.
+
+SC.Binding.disconnect just removes the observers and sets the binding.isConnected to false. It doesn't destroy the binding itself.
+
+SC.Binding.fromPropertyDidChange is a function that is called whenever the observer on the from side signals a change. The function registers the change in the changeQueue, but only if the value of the binding is actually changed.
+
+SC.Binding.toPropertyDidChange is a function that is called whenever the observer on the to side signals a change. The function registers the change in the changeQueue, but only if the value of the binding is different from the transformed value.
+
+SC.Binding._setBindingValue is called by both fromPropertyChange and toPropertyChange, and sets two internal properties: 
+- _bindingSource to the source of the change
+- _bindingKey to the key on the source of the change
+
+SC.Binding._computeBindingValue is a function that takes the _bindingValue and applies all registered transformations on it, and then sets the result as _transformedBindingValue.
+
+The following properties are set to a separate instance of SC.CoreSet:
+ - SC.Binding._connectQueue 
+ - SC.Binding._alternateConnectQueue 
+ - SC.Binding._changeQueue
+ - SC.Binding._alternateChangeQueue
+
+SC.Binding._changePending is false by default
+
+SC.Binding.flushPendingChanges is a function to force all bindings having _changePending set to true to recompute. To do this properly, the property observing is temporarily turned off, until the changes have been propagated. First it connects all bindings that are in the connection queue by calling _connect on them. In order to still allow new connections to be added, the alternateConnectQueue is put in place of the connectQueue. (still this feels a bit weird, why doing so complicated?)
+The same happens to the change queue, only the change is forced onto the binding by calling applyBindingValue. To prevent any double running of the flush, _isFlushing is set to true, and when the flush is done back to false. 
+
+SC.Binding.applyBindingValue applies the new value to the side where it should be. it uses the setPathIfChanged method to prevent overwriting the value by force and causing a windfall of property observers reacting.
+
+SC.Binding.sync is a function will cause the value of the binding to be the same at both ends, by adding it to the changeQueue, or if it is still connecting, forcing it to sync afterwards.
+
+SC.Binding._syncOnConnect is false by default.
+
+SC.Binding._computeBindingTargets is a function which will compute the from and to targets if they are not set yet. It uses SC.tupleForPropertyPath to get access to objects.
+
+SC.Binding.oneWay forces a binding to only notice changes on the from side. It does this by setting the bindings _oneWay property to true. You can also use this method to set it to false again
+
+SC.Binding.transform adds a transformation function to a binding
+
+SC.Binding.resetTransforms removes all transformations from a binding
+
+SC.Binding.noError forces a binding to not try to return an error value, but to return a null value instead when an error occurs
+
+SC.Binding.single forces a binding to only return a single item if the other side is an array.
+
+SC.Binding.notEmpty forces a binding to return a certain placeholder when the other side is empty.
+
+SC.Binding.notNull forces a binding to return a certain placeholder when the other side is null
+
+SC.Binding.multiple forces a binding to return an array
+
+SC.Binding.bool forces a binding to return true or false
+
+SC.Binding.and will AND two path values together and return the result. Very useful when buttons have multiple depencencies
+
+SC.Binding.or is the OR version of SC.Binding.and
+
+SC.Binding.not is the same as SC.Binding.bool, but then with inverse value
+
+SC.Binding.isNull returns true if the value is not null, otherwise false
+
+SC.Binding.toString returns a string describing the content of the binding
+
+SC.binding is a function wrapping SC.Binding.from
+
+====== SC Master ======
+
+Of course only the differences are described here
+
+SC.Binding.connect the syncing is done different. it checks whether a runloop is in progress, if not it schedules a sync
+
+SC.Binding._scheduleSync doesn't do anything if the runloop is in progress or a sync is scheduled on SC.Binding, but otherwise is uses a setTimeout in one ms to force a runloop to run. (dirty...)
+_scheduleSync was introduced in commit https://github.com/sproutcore/sproutcore/commit/6714d228db490a0bd357628e9a5d82f0656c420b 
+but the actual reason is difficult to get from both the commit message as well as the commit itself. (when a property observed by a binding is changed outside a run loop, schedule a run loop automatically.)
+
+Probably this means that whenever a property is set, which doesn't happen inside a browser event... 
+Still it doesn't make sense, because it should always be inside an event...

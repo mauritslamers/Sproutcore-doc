@@ -1,0 +1,46 @@
+====== Paths ======
+
+Paths, also called property paths, are strings describing a certain route through the Object Oriented system. In JavaScript, this path structure resembles the UNIX file system structure, in the sense that there is one global root environment in which every path exists. In JavaScript this is called 'the global object'.
+
+Because there is no proper namespace separation, it is customary to let every application or framework exist in its own global object. This is the reason SproutCore lives in the global SC object.
+
+Normally direct references can be sufficient for getting and pointing at values. In complex frameworks and applications such as SC applications, it can happen that you are pointing to objects or property values that don't exist yet at the moment your object is created. This is especially the case with bindings and observers.
+
+In order to be able to point to those values, even when they might not exist, a path is used.
+Paths can also contain more than just a direct path. You may want to point at a specific path inside an object, but you know part of that path is prone to change. This happens often with paths to an ObjectController or ArrayController.
+
+===== Syntax =====
+
+==== Normal syntax ====
+
+The path string contains the object and property structure that need to be either observed or bounded, such as 
+
+<code javascript>
+contentBinding: 'MyApp.myObjectController.myProperty'
+</code>
+
+When used in a binding, this path will cause the binding code to check the value of 
+MyApp.myObjectController.myProperty and the reference will be a pointer at myProperty.
+
+==== Asterisk syntax ====
+
+There is a special asterisk operator for paths. The asterisk will cause a change to the way the binding checks the value. Instead of checking the value of the last item, it will check the path on the property before the asterix. In certain cases this is needed, because the property observed is an array. When using 
+
+<code javascript>
+contentBinding: 'MyApp.myObjectController.myToManyProperty'
+</code>
+
+the binding would check the value of the myToManyProperty, which is an array. The value of an array (the pointer to that array) doesn't change when the contents of that array changes. So, if we want our binding to fire when the contents of myToManyProperty changes, we need the asterix: 
+
+<code javascript>
+contentBinding: 'MyApp.myObjectController*myToManyProperty'
+</code>
+
+The pointer will not be at myToManyProperty, but instead at myObjectController, and the value of the myToManyProperty property on myObjectController will be checked.
+
+In a way, the asterisk operator splits up the path in two parts, a pointer part and a path part. The pointer part is the base object of which the value of the path part will be checked.
+
+It is important to be careful with the asterisk operator. It may seem useful to do all bindings or paths with asterisks, but be aware that the asterisk operator makes the binding computationally more expensive. 
+
+
+

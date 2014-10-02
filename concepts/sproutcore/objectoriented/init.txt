@@ -1,0 +1,10 @@
+====== init(): the constructor ======
+
+In many OO environments, a class has a constructor function which will allow you to set up some defaults on the object you are creating. This works a bit differently in Javascript, because of the underlying prototypal inheritance.
+
+SproutCore provides a constructor mechanism in the form of the init function. By defining the init function on either your new class or instance, the actions you provide in that functions will be executed when the instance is created. 
+
+(not sure about this: )
+Moreover, the init function is the last item in the process that creates a new object, so you will have access to all properties and values copied from the classes and object the newly created object inherits from and you know that values you define in the constructor will not be overwritten by inherited properties.
+
+In some cases it is very important to have access to the original constructor function. As defining the init function 'overwrites' the original function, you need to use a special construct which allows you to call the original init function: [[scsuper | sc_super()]];

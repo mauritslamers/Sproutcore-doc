@@ -1,0 +1,14 @@
+A take apart of the runtime framework. 
+The runtime frameworks forms the very basic structure of SC.
+It adds property bindings and observers.
+This is a description by reading per file and explaining what is what and how things are related
+
+====== Runtime ======
+
+===== core.js =====
+
+[[takeapart:runtime:core.js | core.js ]]
+
+[[takeapart:runtime:system/binding.js | system/binding.js]]
+
+[[takeapart:runtime:mixins/observable.js | mixins/observable.js]]

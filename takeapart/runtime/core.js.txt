@@ -1,0 +1,58 @@
+core.js starts with defining a few functions, which are actually used in the build tools, and are strictly not javascript functions.
+
+then it sets window.YES and window.NO to true and false. (let's depricate this)
+
+then a catch for browsers not having console, to catch calls to console.log
+
+then we start with defining SC as a global object and we also do the full name.
+
+Next we set the SC.VERSION.
+
+Then definition of SC._baseMixin. This function will copy properties and functions onto target from the ones provided in one or more sources.
+SC.mixin is essentially the same function, and defaults to overwriting existing properties.
+SC.supplement is also essentially the same, but doesn't overwrite.
+SC.extend is equal to SC.mixin, so whenever you do MyObject = SC.Object.extend(SC.Control,{}), you are using mixins
+
+SC uses its own types, as there is a difference between a hash (simple JS object) and a SC.Object. So, it also defines its own typeOf function, as the one provided by JS cannot make this difference.
+
+Then we have a few helper functions, such as none (obj == null) and empty which checks whether a string is empty. (why?)
+
+Then we get a few array helper functions: isArray (checking), makeArray and A.
+makeArray and A are different in that A will clone if the value is already array-like, and makeArray will not.
+
+Then we have guid. For sproutcore it is important to keep track of many things and it uses a _guid property to do so. The reason why this is important is not clear yet...
+
+SC.keyFor is effectively a string concat function with cache.
+
+SC.generateGuid generates a guid out of a prefix and a jQuery.uuid. when the item is an object, it will get the key as guidKey property. it returns the guid.
+
+Then we get a compare method, which also creates an Order definition mapping and then destroys order definition... (why?)
+
+then we get a set of empty objects, which are useful as there is a textual explanation (?)
+- SC.K, an empty function which just returns the current object
+- SC.EMPTY_ARRAY, an empty array
+- SC.EMPTY_HASH, an empty hash
+- SC.EMPTY_RANGE, an empty range, which is an object with a start and a length property, both set to 0
+
+Then we get one of the most important elements of SC (and any JS framework): SC.beget
+SC.beget is effectively a method which takes an object, uses it as a prototype and then creates a new instance of it. SC.beget uses SC.K (the empty function) as temporary model. It also calls didBeget on your new object to allow you to do other setup things. With SC.Object this triggers the init function. (educated guess).
+
+SC.copy is a function that allows you to make both deep and shallow copies of objects
+
+SC.merge creates a new object from all objects you pass as a parameter
+
+SC.keys is equivalent to Object.keys, in the sense that it returns an array of keys of an object
+
+SC.inspect is a utility method to inspect the contents of objects. very useful when debugging.
+
+An important part of SC is property paths. Property paths are strings denoting a path into an object.
+let's say that you have myApp.myObjectController.myproperty, you can try to write that every time literally, but that can cause issues if you need to refer to it, when myApp.myObjectController doesn't exist yet. We cannot do myApp['myObjectController.myproperty'] though. To solve this, SC uses the latter string part as a property path: myApp.getPath('myObjectController.myproperty'), which will not fail even if myObjectController doesn't exist yet. [[concepts:sproutcore:paths | See property paths ]]
+
+SC.tupleForPropertyPath returns an array with object and property, so in the case above it returns [myApp.myObjectController,myproperty].
+
+SC.objectForPropertyPath is used by tupleForPropertyPath to actually find the object the property path is referring to. Referring to the case above, myApp.myObjectController would be the object for the property path given.
+
+SC.requiredObjectForPropertyPath wraps SC.objectForPropertyPath, and raises an error when the object cannot be found.
+
+Then we continue with a few definitions, such as SC.clone = SC.copy, SC.$A = SC.A and SC.didLoad = SC.K.
+Then we finish with the order_definition mentioned in SC.compare.

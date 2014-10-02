@@ -1,0 +1,304 @@
+<code>
+[8:42pm] tomdale: you guys should consider porting the SC view layer to Ember
+[8:43pm] JoeGaudet: no small task :P
+[8:44pm] tomdale: how are you guys getting your sproutcore apps to run on mobile devices?
+[8:44pm] JoeGaudet: Ours is still in alpha on that front, loads and works. But interactions are pretty weak
+[8:44pm] JoeGaudet: Are you suggesting the run time would speed things up ?
+[8:45pm] tomdale: the ember runtime is probably at least 100x as fast as SC's by now
+[8:45pm] JoeGaudet: I'd like to see actual benchmarks for that
+[8:46pm] tomdale: someone should do that
+[8:47pm] tomdale: but we've spent a lot of energy on tuning performance of runtime
+[8:47pm] JoeGaudet: Sure, I mean 100x is a pretty bold claim though ;)
+[8:47pm] tomdale: I don't think anyone is working on that in SC, unless I've missed something
+[8:47pm] Me1000 betrad het kanaal.
+[8:47pm] tomdale: is it?
+[8:47pm] MEMutable1000 betrad het kanaal.
+[8:48pm] JoeGaudet: I'd say two orders of magnitude is a bit of a large claim.
+[8:48pm] tomdale: no one is working on getting SC running on mobile, and we've invested significant resources
+[8:48pm] tomdale: I mean, a rocket is an order of magnitude faster than tricycle
+[8:48pm] JoeGaudet: at least
+[8:48pm] JoeGaudet: I'd be interested in understand where the performance gains have been made
+[8:48pm] JoeGaudet: What parts of the runtime are to blame
+[8:49pm] tomdale: so the biggest thing that we've focused on is trying to ensure that hot path functions are not megamorphic
+[8:49pm] tomdale: with the SC/Ember object model it is very easy to deopt V8
+[8:50pm] tomdale: Ember is also much more lazy about things that SC is optimistic about
+[8:50pm] tomdale: like collapsing the class tree into the prototype
+[8:51pm] tomdale: I'm surprised you think 100x is a bold claim when people are making businesses out of mobile apps with the ember runtime and I have yet to see an SC app load on a mobile device in a reasonable amount of time
+[8:51pm] JoeGaudet: Load time and runtime are different ideas
+[8:51pm] Me1000 verliet het kanaal. (Ping timeout: 245 seconds)
+[8:52pm] tomdale: I'm not trying to troll, just trying to get you guys to move your shit on top of ember-runtime :P
+[8:52pm] mauritslamers: and what is that going to bring us?
+[8:52pm] mauritslamers: because just speed is not enough :)
+[8:52pm] tomdale: you don't think that improved speed and memory consumption is a good reason to switch?
+[8:53pm] tomdale: the differences between the sproutcore-runtime and ember-runtime are relatively minimal from an API perspective
+[8:53pm] mauritslamers: it depends on what the trade-offs are
+[8:53pm] tomdale: our implementation is just much better
+[8:53pm] tomdale: and has more people actively working on it
+[8:54pm] tomdale: I think you guys could regain some project momentum if you refocused it as a view layer that sits on top of ember
+[8:54pm] mauritslamers: what about doing a pull request... :)
+[8:54pm] mauritslamers: We would love to have some of that :)
+[8:54pm] tomdale: uh yeah I mean I am working on ember full time
+[8:54pm] mauritslamers: if the API is minimal and the stuff can be moved on top of it, we would love to have your input
+[8:55pm] tomdale: I personally don't have any desire to do that
+[8:55pm] tomdale: but many people ask me about UI frameworks
+[8:55pm] tomdale: because they want a native style UI
+[8:55pm] mauritslamers:  s/if the API is minimal/ if the API changes are minimal
+[8:55pm] tomdale: it would be great if I could point them at SC
+[8:55pm] mauritslamers: tomdale: exactly, so help us out here
+[8:56pm] mauritslamers: you know as well as I do that since Charles went to Facebook and Strobe disappeared, the project and the community around it were sort of left in the lurch...
+[8:57pm] nicolasbadia verliet het kanaal. (Quit: nicolasbadia)
+[8:57pm] tomdale: not really
+[8:57pm] mauritslamers: everyone took off, to Ember, to Facebook, and left the project and the management just out in the open
+[8:57pm] tomdale: sproutcore 2 turned into ember and has done well
+[8:57pm] mauritslamers: And don't get me wrong, I don't want to attack you :)
+[8:57pm] mauritslamers: ember is just not sproutcore, that is, it didn't bring much to the sproutcore community
+[8:57pm] JoeGaudet: The issue for people in this camp, is they already have developed products
+[8:58pm] JoeGaudet: So it would need to have a clear migration.
+[8:58pm] mauritslamers: tomdale: just as an example: the SC community is still waiting for charles to give us founder rights to the sproutcore-dev IRC channel...
+[8:58pm] tomdale: JoeGaudet: sure, but if you keep SproutCore terrible because some apps are written on top of it, then no one will contribute to it, and it will slowly die anyway
+[8:58pm] nicolasbadia betrad het kanaal.
+[8:58pm] JoeGaudet: I'm not disagreeing with you.
+[8:58pm] JoeGaudet: But just amputating the view layer wouldn't work for us either
+[8:59pm] tomdale: this is pretty textbook innovator's dilemma
+[8:59pm] JoeGaudet: We (My company and I) only have so many engineering hours to use on non core product stuff
+[8:59pm] tomdale: what I'm trying to say is that I believe there is a path for you to move sproutcore apps onto ember
+[8:59pm] tomdale: in a way that is not 100% backwards compatible but it is relatively straightforward
+[9:00pm] tomdale: it would just involve moving the SC view layer to live on top of ember runtime
+[9:00pm] tomdale: what is the plan for SproutCore long term?
+[9:00pm] tomdale: I have not seen much on the mailing list
+[9:01pm] mauritslamers: There is a plan for SC2 which is a bit slimmed down version (without templates etc, new buildtools)
+[9:01pm] tomdale: mauritslamers: where can I read about that?
+[9:02pm] tomdale: why not just use something like yeoman or grunt and write plugins?
+[9:02pm] mauritslamers: because we don't want ruby
+[9:02pm] mauritslamers: and we already have something that is much more configurable
+[9:02pm] tomdale: grunt is not ruby
+[9:02pm] mauritslamers: grunt does sass through ruby 
+[9:02pm] mauritslamers: and compass
+[9:02pm] tomdale: what are you using instead?
+[9:02pm] mauritslamers: garcon, SCified
+[9:03pm] tomdale: but what are you using instead of sass and compass?
+[9:03pm] mauritslamers: so we have both SC in node as well as in the browser
+[9:03pm] mauritslamers: we use sass, but compass is a bit of an issue
+[9:03pm] mauritslamers: the css part works, but the sass extensions don't because they are ruby
+[9:03pm] mauritslamers: (including extra functions)
+[9:03pm] JoeGaudet: The interesting bit would be if the ember runtime could be plugged in to the sproutcore/frameworks/runtime
+[9:04pm] JoeGaudet: If it is mostly API compatable
+[9:04pm] JoeGaudet: AS there is still the view layer + datastore + statecharts + routine
+[9:04pm] JoeGaudet: routing that is all being depended on
+[9:04pm] mauritslamers: tomdale: can you point at documentation of the ember runtime API?
+[9:04pm] tomdale: the biggest breaking change is that you cannot create anonymous subclasses
+[9:05pm] tomdale: so doing App.Class.create({ computedProperty: function() { }.property() }) won't work
+[9:05pm] JoeGaudet: Yeah a lot of shit would explode
+[9:05pm] JoeGaudet: How do you do computer properties ?
+[9:05pm] tomdale: you have to call extend() if you are using super() or defining computed properties
+[9:05pm] tomdale: create() is effectively just instantiate + call setProperties()
+[9:06pm] tomdale: I mean not actually, but that's the semantics
+[9:06pm] tomdale: mauritslamers: it's all documented here: http://emberjs.com/guides/object-model/classes-and-instances/
+[9:06pm] tomdale: JoeGaudet: maybe shit would explode, but that's a big part of the reason SC is so slow
+[9:07pm] tomdale: the object model has to do a lot of expensive shit to make that work
+[9:07pm] tomdale: if you have this invariant, you can make object creation extremely fast
+[9:07pm] JoeGaudet: Maybe I'm missing somehitng, how do computed properties work in ember ?
+[9:07pm] JoeGaudet: Oh looking now
+[9:07pm] tomdale: the same as SC
+[9:07pm] tomdale: you just have to define them in classes, not instances
+[9:08pm] tomdale: so the problem is that under the hood
+[9:08pm] tomdale: in SC
+[9:08pm] tomdale: when you call Ember.Object.create()
+[9:08pm] tomdale: the hash that you pass may or may not contain methods and computed properties
+[9:08pm] tomdale: so it has to scan the entire hash looking for them
+[9:08pm] tomdale: and if it finds them, it has to go back and fixup the prototype chain
+[9:08pm] tomdale: it's effectively creating an anonymous subclass and instantiating it, which is expensive
+[9:08pm] JoeGaudet: Right
+[9:09pm] mauritslamers: so effectively doing the anonymous extension could syntactically be .extend({ blah: function().property('boo') }.create();
+[9:10pm] mauritslamers: in ember that is?
+[9:10pm] tomdale: mauritslamers: exactly
+[9:10pm] tomdale: it just makes explicit what is going on
+[9:10pm] JoeGaudet:     Unlike most frameworks, you do not pass parameters to the init function
+[9:10pm] JoeGaudet:     for an object.  Instead, you pass a hash of additional properties you
+[9:10pm] JoeGaudet:     want to have assigned to the object when it is first created.  This is
+[9:10pm] JoeGaudet:     functionally like creating an anonymous subclass of the receiver and then
+[9:10pm] JoeGaudet:     instantiating it, but more efficient.
+[9:10pm] JoeGaudet: hahah
+[9:10pm] JoeGaudet: From SC
+[9:12pm] tomdale: the assign vs. define semantics in SC are EXTREMELY loosy goosey
+[9:12pm] mauritslamers: so, that could be easily circumvented by having the create function call extend first when it sees a hash?
+[9:12pm] mauritslamers: tomdale: I am just imagining how we might make the optional transition easier...
+[9:13pm] tomdale: we added a method to Ember.Object called createWithMixins
+[9:14pm] tomdale: that retains the old semantics
+[9:14pm] tomdale: but I imagine we will eventually deprecate it
+[9:14pm] tomdale: in 1.1 or 1.2 perhaps
+[9:15pm] JoeGaudet: Ponder ponder
+[9:15pm] mauritslamers: tomdale: is there a company behind ember atm?
+[9:15pm] mauritslamers: (I didn't keep up with the news on this front :) )
+[9:17pm] tomdale: no
+[9:18pm] tomdale: I mean, I have a company with Yehuda
+[9:18pm] tomdale: we use company time to work on ember
+[9:18pm] tomdale: but Yehuda and I have not worked on runtime in… six months?
+[9:18pm] tomdale: the majority of the contributions have come from a company called Yapp
+[9:18pm] MEMutable1000 staat vanaf nu bekend als Me1000.
+[9:19pm] mauritslamers: tomdale: what I mean is, the last time we had a company pulling Sproutcore forward and then completely dropped everything as soon as Facebook came into the picture :)
+[9:19pm] tomdale: both Yehuda and I could have made a lot of money by going to Facebook
+[9:19pm] tomdale: but we didn't to keep working on Ember
+[9:19pm] JoeGaudet: tomdale: Is there a responder system in Ember similar to SC ? or would that have to be ported a lot
+[9:20pm] tomdale: JoeGaudet: SC.Responder and SC.ResponderContext are together probably &lt;200LoC if I remember correctly
+[9:20pm] JoeGaudet: Yeah for sure, just trying to understand what would actually have to come along :)
+[9:20pm] tomdale: mauritslamers: I dunno, look at the carousel on emberjs.com
+[9:20pm] mauritslamers: tomdale: as I said earlier, I don't mean to attack you or take things personally, I am just trying to see the picture for the "larger community" (if such a thing exists :) )
+[9:20pm] tomdale: all of those companies have contributed to emebr
+[9:21pm] tomdale: s/emebr/ember/
+[9:21pm] tomdale: this carousel is getting out of control
+[9:21pm] JoeGaudet: Root responder is a pretty fat file as well :)
+[9:21pm] mauritslamers: tomdale: What I mean is that it would be great to have some kind of a community
+[9:21pm] tomdale: I need to figure out what we're going to do
+[9:22pm] tomdale: JoeGaudet: yeah, you would probably not want to use RootResponder
+[9:22pm] tomdale: it is extremely fucked
+[9:22pm] tomdale: unless someone fixed it in the last year and a half
+[9:22pm] tomdale: you would probably want to use Ember's EventDispatcher
+[9:22pm] tomdale: which does the same thing
+[9:22pm] mauritslamers: SC is now registering with SPI
+[9:22pm] tomdale: mauritslamers: the Ember community is much larger than SC's ever was
+[9:22pm] mauritslamers: tomdale: I am aware of that
+[9:23pm] mauritslamers: but there is (as far as I know) also a major difference between Ember and SC
+[9:23pm] mauritslamers: my perception of it is that Ember is more like jQuery UI than writing plain HTML views
+[9:23pm] Jasko2 verliet het kanaal. (Read error: Connection reset by peer)
+[9:23pm] tomdale: it's nothing like jQuery UI
+[9:24pm] mauritslamers: so, I would love to reconsider that picture
+[9:24pm] Jasko2 betrad het kanaal.
+[9:24pm] mauritslamers: SC was never about the widgets so to say (as you undoubtedly know)
+[9:24pm] tomdale: what I'm telling you guys is that I think there is a possibility to regain momentum for the sproutcore project if you throw away the cruft and focus on just being an awesome native UI layer on top of Ember
+[9:24pm] tomdale: I'm not sure if anyone cares about that
+[9:24pm] tomdale: but
+[9:24pm] tomdale: that would be a viable strategy if it was
+[9:24pm] mauritslamers: tomdale: it is certainly something to think about
+[9:24pm] tomdale: mauritslamers: you should read through the ember documentation
+[9:25pm] mauritslamers: tomdale: I will
+[9:25pm] tomdale: it's not too long
+[9:25pm] tomdale: I have a soft spot for sproutcore in my heart
+[9:25pm] tomdale: I have battled to keep all of the important ideas in SC alive in Ember
+[9:25pm] mauritslamers: tomdale: great :)
+[9:26pm] dcporter betrad het kanaal.
+[9:26pm] tomdale: anyway, I should probably get back to work writing more docs :P
+[9:26pm] tomdale: but you guys should consider it
+[9:26pm] tomdale: I'd be happy to answer any questions you have
+[9:26pm] mauritslamers: tomdale: great, thanks for that!
+[9:27pm] mauritslamers: tomdale: quick question: is the V property still part of Ember?
+[9:27pm] JumpMast3r verliet het kanaal. (Quit: JumpMast3r)
+[9:28pm] tomdale: by "V property" I assume you are referencing the fact that views send events to controllers, controllers change models, and views update themselves in response to the underlying model change?
+[9:29pm] mauritslamers: yep
+[9:29pm] tomdale: yes
+[9:29pm] mauritslamers: the view -&gt; controller -&gt; model -&gt; controller -&gt; view
+[9:29pm] tomdale: think of Ember as SproutCore without the native widgets
+[9:29pm] mauritslamers: but with templates
+[9:29pm] tomdale: the architecture is basically the same
+[9:29pm] tomdale: yes
+[9:29pm] tomdale: the only difference is that SC asks you to create global singletons, which is bad
+[9:29pm] tomdale: it is hard to test
+[9:30pm] tomdale: so we do "dependency injection"
+[9:30pm] JoeGaudet: Your controllers are still Singletons
+[9:31pm] tomdale: they are by default, yes
+[9:31pm] tomdale: not always
+[9:31pm] tomdale: but what this means is that you never bind to `App.fooController.bar`
+[9:32pm] tomdale: but the architecture is almost exactly the same model
+[9:32pm] mauritslamers: but using the Ember runtime to power SC would not prevent that kind of a binding, does it?
+[9:32pm] JoeGaudet: Oh you mean inside the view ?
+[9:32pm] tomdale: think of Ember as SproutCore if the API was more like Rails or jQuery than like Cocoa
+[9:32pm] tomdale: mauritslamers: not technically, no
+[9:32pm] tomdale: every view is connected to a controller
+[9:32pm] tomdale: that view &lt;-&gt; controller relationship is set up at runtime
+[9:32pm] tomdale: it's not hardcoded to a global singleton
+[9:33pm] tomdale: this makes it super easy to test
+[9:33pm] JoeGaudet: Right
+[9:33pm] JoeGaudet: I mean you can still do that in SC if you override the binding / or set the controller mannually in the test.
+[9:34pm] tomdale: because the architecture is basically the same, there's nothing that would prevent you from doing this stuff in SC
+[9:34pm] tomdale: it's just hard
+[9:34pm] tomdale: because we made it conventional in Ember, it's easier to do "the right thing" that the wrong thing like binding to global singletons
+[9:34pm] tomdale: s/that/than/
+[9:34pm] JoeGaudet: Right right
+[9:34pm] JoeGaudet: Interesting
+[9:35pm] tomdale: http://emberjs.com/guides/getting-started/core-concepts/ hopefully explains it
+[9:35pm] dcporter: if a view is a globally unique view there's no reason to not have a globally unique controller controlling it
+[9:35pm] tomdale: dcporter: it's not globally unique in tests
+[9:36pm] dcporter: for example?
+[9:36pm] tomdale: being able to fire up multiple copies in the same memory space and not have them interact ends up being a very nice property
+[9:36pm] tomdale: for automated testing
+[9:36pm] dcporter: hmm. is that markedly easier than just creating, testing, winding down in sequence?
+[9:37pm] tomdale: of course
+[9:37pm] tomdale: you get to dispose of just one object
+[9:37pm] tomdale: if you bind your views to global singletons, you by definition have to clean up the global scope each test
+[9:37pm] tomdale: which is of course possible, but annoying and easy to screw up
+[9:38pm] dcporter: the theory being you save yourself the trouble of cleaning up, since we don't usually care about memory leaks in tests (run and done)?
+[9:39pm] tomdale: this is actually better for memory
+[9:39pm] tomdale: it basically says, all of the dependencies for this view live on the view object
+[9:39pm] tomdale: they never are on the global scope or other projects
+[9:39pm] tomdale: so the second you finish the test, you lose the path from the global scope to the object, and it + all of its dependencies can be GCed
+[9:45pm] mauritslamers: tomdale: looking through the docs, I see something that I find a bit confusing: http://emberjs.com/guides/views/customizing-a-views-element/ = third example
+[9:46pm] mauritslamers: that is not a binding, that is a computed property
+[9:46pm] mauritslamers: (at least in SC that would be the case)
+[9:46pm] tomdale: classNameBindings is a special property that binds a view's element's `class` attribute to a property on the view
+[9:47pm] tomdale: hopefully the example below should clarify the behavior?
+[9:47pm] mauritslamers: my main question here is: is this done by the runtime?
+[9:47pm] mauritslamers: it is not the behaviour, but for me more the inconsistency of what a Binding is and what a computed property is :)
+[9:47pm] tomdale: mauritslamers: if you're asking if `Bindings` is a magic word in the same vein as `Binding`, the answer is no
+[9:47pm] mauritslamers: ah, ok :)
+[9:47pm] tomdale: note the `s` at the end
+[9:47pm] tomdale: it is `Bindings`, not `Binding`
+[9:47pm] JoeGaudet: SC has that same property
+[9:47pm] mauritslamers: I do, but that is going to cause confusion :)
+[9:47pm] JoeGaudet: exactly
+[9:48pm] tomdale: the good news is that you very rarely ever need to do `fooBinding: 'bar.baz'` in Ember
+[9:48pm] mauritslamers: not if you start using something like a store
+[9:49pm] tomdale: Ember has something like a store
+[9:49pm] tomdale: ember-data
+[9:49pm] tomdale: it's like SC's data store on steroids
+[9:49pm] tomdale: (described in the Models portion of the guides, http://emberjs.com/guides/models/)
+[9:51pm] dcporter verliet het kanaal. (Quit: dcporter)
+[9:52pm] mauritslamers: tomdale: in depth question: how does ember-data handle nested records?
+[9:55pm] tomdale: well, that it is a very involved answer ;P
+[9:55pm] tomdale: the TL;DR is that we have split the "data source" into two objects: the adapter and the serializer
+[9:55pm] mauritslamers: that is not exactly what I mean... :)
+[9:55pm] tomdale: the adapter figures out which URLs to send payloads to
+[9:56pm] tomdale: the serializer is responsible for serializing a graph of records
+[9:56pm] tomdale: and deserializing them, of course
+[9:56pm] mauritslamers: I mean: can you create a set of controllers handling one nested record together?
+[9:56pm] tomdale: what do you  mean nested record?
+[9:56pm] tomdale: you mean a record derived from a nested store?
+[9:56pm] mauritslamers: a nested record is a record having subrecords
+[9:57pm] mauritslamers: not necessarily one layer, but a few
+[9:57pm] tomdale: uh
+[9:57pm] tomdale: you mean relationships?
+[9:57pm] mauritslamers: relationships is SQL talk ;-)
+[9:57pm] mauritslamers: relationships exist between separate records: no I have a record which has toOne, which is part of the same hash
+[9:58pm] tomdale: yes
+[9:58pm] tomdale: we call those embedded records
+[9:58pm] mauritslamers: does the store handle those records as one?
+[9:58pm] mauritslamers: the current nested record approach in SC disassembles them and stores them separately in the store
+[9:58pm] tomdale: no they are completely independent as far as the store is concerned
+[9:59pm] tomdale: but when they are saved, they are saved as part of their parent
+[9:59pm] tomdale: basically if you modify an embedded record, we mark it and its parent dirty
+[9:59pm] tomdale: and they get serialized together
+[9:59pm] mauritslamers: hmm, 
+[9:59pm] mauritslamers: I find that rather weak
+[10:00pm] tomdale: how else would it work?
+[10:00pm] mauritslamers: I rewrote the nested record approach in SC to handle all the embedding through the model
+[10:00pm] fzerorubigd verliet het kanaal. (Quit: Ex-Chat)
+[10:00pm] tomdale: I don't know what "through the model" means
+[10:00pm] mauritslamers: ok
+[10:01pm] mauritslamers: everything nested goes through the store now
+[10:01pm] mauritslamers: which means that the embedded record is disassembled on arrival, separated out in many records in the store
+[10:01pm] mauritslamers: What I did is get rid of this automatic disassembly, and return model instances only through the main record
+[10:02pm] mauritslamers: or subsequent subrecords
+[10:02pm] mauritslamers: this means that the embedded stuff itself is never duplicated or separated, it lives in the store as one hash
+[10:03pm] mauritslamers: the main record instance is the only one interacting with the store, all the other updates is done in the models themselves
+[10:04pm] mauritslamers: if something changes, the embedded record instances tells the main record which in turn updates the store
+[10:05pm] mauritslamers: this solves the age old problem in SC that it was impossible to do a DAG of controllers on embedded records
+[10:05pm] mauritslamers: tomdale: makes sense?
+[10:06pm] tomdale: conceptually we do this too, if the child has no ID
+[10:06pm] tomdale: the only problem with what you are doing is that if a child is mutated the entire graph must be serialized and sent back
+[10:06pm] tomdale: which leads to large payloads
+[10:07pm] mauritslamers: yes... that is the point: if people are using nested records as just a payload mechanism, they should not depend on the store to disentangle stuff
+[10:08pm] dcporter betrad het kanaal.
+[10:08pm] mauritslamers: a record with embedded stuff is not a real "nested record" if it can be saved as separate items
+[10:10pm] mauritslamers: looking at the REST adapter: a nice marriage between the data source (which was always a weak design anyway) and the core-io framework approach
+[10:16pm] mauritslamers: tomdale: but I indeed see the point that by tapping into very similar basic functionality we might also gain traction 
+
+</code>

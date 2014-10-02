@@ -1,0 +1,24 @@
+====== The extend function ======
+
+SproutCore provides the extend function to create new classes based on existing classes. This extend function also allows multiple inheritance, as you can give it extra objects or mixins to use when creating the class. 
+
+The syntax is
+
+<code javascript>
+var NewClass = sourceObject.extend(mixin,anotherMixin, { object literal });
+</code>
+
+You can provide as many mixins as you want, as long as you end with the object literal of the custom options you want to have.
+
+Note: As you may see here, the general agreement is that the first letter of a class name should be a capital!
+
+There is a kind of caveat in using extend: the difference between class properties and instance properties. If a property is given a value in an extension definition, this property will become a class property. This means that when the value of that property is changed on one instance, the value will also change across all other instances of that class.
+If you don't want this behaviour, you need to set the value to null and set the value either in the constructor ((see the [[init | init()]] function)), in the instantiation call or in a function that will use the specific property.
+
+The reason behind this behaviour is that JavaScript uses references (pointers to values) instead of values.((In JavaScript values are immutable and all properties are actually pointers to values. If the value changes, a new pointer will be set.))
+
+In Ruby this difference has been made explicit by using a syntactical difference between class and instance properties((prepended @@ for class properties and @ for instance properties)), but in JavaScript this is not the case.
+
+==== Example ====
+
+<embed examples:extend />

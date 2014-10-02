@@ -1,0 +1,128 @@
+====== Installing SproutCore with Garcon ======
+
+===== Mac & Linux =====
+
+**Note: For Mac, this step requires XCode to be installed. On Linux, you need either gcc, and follow step 1, or install a precompiled package**
+
+==== 1. Download and install node-js ====
+
+Download the source code from [[http://nodejs.org]], unpack and enter the created directory.
+Then run:
+
+<code>
+./configure && make && sudo make install
+</code>
+
+**Keep the directory around after installation!** If you want to update node at some point (which you probably will, as node development is quite fast), you will need to run 
+<code>
+sudo make uninstall
+</code>
+in that directory later before installing the new version.
+
+==== 2. Install Git ====
+
+
+
+==== 3. Installing Garcon ====
+
+Currently, the easiest way to install Garcon is by cloning the repository.
+So, go to the directory containing your project directory and then do
+
+for Sproutcore 1.4
+<code>
+git clone git://github.com/martoche/garcon garcon
+</code>
+
+for the Sproutcore master branch
+<code>
+git clone git://github.com/mauritslamers/garcon garcon
+</code>
+
+==== 4. Create a project configuration file ====
+
+
+
+===== Windows =====
+
+==== 1. Install node-js ====
+
+Download package from [[http://node-js.prcn.co.cc/]] and unpack it, for example on your desktop. 
+
+==== 2. Install Git ====
+
+Download package from [[http://code.google.com/p/msysgit/downloads/list?can=3]] and install (choose the safest installation method)
+
+==== 3. Clone Garcon ====
+
+Start the Git bash console, go to the folder containing your SproutCore projects and do:
+
+for Sproutcore 1.4
+<code>
+git clone git://github.com/martoche/garcon garcon
+</code>
+
+for the Sproutcore master branch
+<code>
+git clone git://github.com/mauritslamers/garcon garcon
+</code>
+
+
+**Note: you may have to adjust a line in lib/framework.js to let garcon load all the basic sproutcore frameworks.**
+
+==== 4. Clone / create your project ====
+
+Clone or create your project folder, preferrably in a directory at the same level as garcon. If you are cloning, use the Git bash console.
+
+==== 5. Clone the SproutCore project in your project ====
+
+inside the project folder, create a frameworks directory and clone the sproutcore framework. 
+<code>
+git clone git://github.com/sproutcore/sproutcore.git sproutcore
+</code>
+
+==== 6. Create your garcon configuration file ====
+
+Create a file in the root of your project folder and insert the following contents into it.
+
+<code javascript myapp.js>
+var g = require('../garcon/lib/garçon'),
+    server = new g.Server({ port: 8010, proxyHost: 'localhost', proxyPort: 8080});
+
+var myApp = server.addApp({
+  name: 'myapp'
+});
+
+myApp.addSproutcore();
+
+myApp.addFrameworks(
+  { path: 'frameworks/sproutcore/themes/empty_theme'},
+  { path: 'frameworks/sproutcore/themes/standard_theme'},
+  { path: 'apps/myapp'} //, buildLanguage: 'french' }
+);
+
+myApp.htmlHead = '<title>myApp</title>';
+
+myApp.htmlBody = [
+  '<div id="loading">',
+    '<p id="loading">',
+	    'Loading…',
+	  '</p>',
+  '</div>'
+].join('\n');
+
+myApp.build();
+
+server.run();
+</code>
+
+If your apps uses additional frameworks, you will need to add them to the addFrameworks function call in the same way as your application is included.
+
+==== 7. Start your app ====
+
+Inside the node package unpacked earlier there is a .cmd file. Doubleclicking on this file will set a few environment settings and opens a normal windows command prompt. Use this command prompt to go into the root of your project folder and call
+
+<code>
+node myapp.js
+</code>
+
+and open your browser at [[http://localhost:8010]]

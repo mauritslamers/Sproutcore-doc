@@ -1,3 +1,11 @@
+====== Notes ======
+
+These are notes taken from e-mail and IRC chat conversations which can explain certain aspects.
+
+
+----
+\\
+
 [[notes:aboutviews | basic custom view building]] 
 A conversation between erichocean and ku0n about building custom views
 
@@ -9,3 +17,23 @@ A conversation between erichocean and ku0n about building custom views
 
 [[notes:aboutappdesign | About application design and concepts]]
 A small lecture by Erich Ocean on the channel
+
+[[notes:abouttargetaction | About targets, actions and parameters ]]
+
+[[notes:erichoceancourse | notes of the erichocean course at 22-12-2010]]
+
+[[notes:customviewcode | note about the render code of a custom view]]
+
+[[notes:outlet | explanation about outlet]]
+
+[[notes:customlistitem | How to easily do a custom list item ]]
+
+[[notes:loadingexternalmodule | How to load an external framework using statecharts]]
+
+[[notes:rootresponder_and_events | How the root responder is catching events ]]
+
+[[notes:customheightview_with_content | How to create a view with custom height ]]
+
+[[notes:updatefrom145 | A few tricks to update your app to SC master from 1.4.5 ]]
+
+[[notes:tomdaleaboutEmberObject | Tom Dale talking about differences between Ember.Object and SC.Object]]

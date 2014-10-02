@@ -1,0 +1,16 @@
+====== SproutCores Object Oriented system ======
+
+JavaScript is an object oriented language. In contrast to many other object oriented languages, it doesn't have a class and instance system but has a prototypal inheritance system instead.
+
+SproutCore implements a Cocoa like framework in JavaScript, so it needs to have a class and instance system. SproutCore therefore wraps the object and prototype system in such a way that they can be used as a class and instance system. Of course, the result is still Javascript, which means it is still possible to use it very flexibly.
+
+The flexibility and functional nature of this system becomes apparent as the method to create both classes and instances are function calls. These function calls are often given a parameter in the form of an object literal: an object with properties and methods defined on the spot.
+
+Read more about:
+
+[[inheritance | Inheritance ]]\\
+[[mixins | Mixins ]]\\
+[[extend | extend()]]\\
+[[create | create()]]\\
+[[init | init()]]\\
+[[scsuper | sc_super()]]\\

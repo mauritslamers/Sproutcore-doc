@@ -1,0 +1,10 @@
+====== sc_super() ======
+
+In contrast with almost everything else, sc_super is not a JavaScript function, but is replaced by the build tools with the following:
+
+<code javascript>
+arguments.callee.base.apply(this, arguments);
+</code>
+
+This function call is a way to be able to get to the function of the original class you are either extending or creating. So, if you are extending a class and you want to initialise a specific variable you created without the risk of it becoming a class property, and you also want that behaviour from the parent class, you must use sc_super().
+You can also use the direct code itself if you want, but sc_super(); is just a convenient way to do this.

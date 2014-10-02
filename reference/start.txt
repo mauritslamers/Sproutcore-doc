@@ -1,8 +1,8 @@
 ====== Reference ======
 
-At the moment we are focussing on the concepts and examples.
+At the moment the reference on this site is not yet complete. So, please use the links below in addition to the information here.
 
-Please use [[http://docs.sproutcore.com]]  or [[http://wiki.sproutcore.com]] for the moment
+[[http://docs.sproutcore.com]] or [[http://wiki.sproutcore.com]]
 
 [[reference:runtime:start | Basic SproutCore functions]]
 

@@ -1,0 +1,14 @@
+If you want to create a custom list item, don't extend SC.ListItemView unless you are knowing what you are doing. The easier way is making a custom view which extends SC.View instead and mixes in SC.Control:
+
+
+<code javascript>
+MyApp.myCustomListItem = SC.View.extend(SC.Control, {
+  childViews: 'some parts'.w(),
+  
+  some: SC.View.design({
+  }),
+  
+  parts: SC.View.design({
+  })
+});
+</code>

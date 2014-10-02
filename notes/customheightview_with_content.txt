@@ -1,0 +1,32 @@
+by jdooley
+
+The view creates a hidden div on init, which is used to calculate the width and height of the view, 
+in order to properly insert it in some list later.
+
+<code javascript>
+
+SC.View.extend({
+  init: function () {
+    sc_super();
+    this.$().append('<div class="sizer" style="visibility: hidden"></div>');
+  },
+
+  render: function (context,firstTime) {
+    var content = this.get('content'), frame = this.get('frame'),
+      layout, height, sizer;
+
+    if (content) {
+      sizer = this.$('.sizer');
+      sizer.attribute('width',frame.width).html(content);
+      height = sizer.height();
+      layout = SC.clone(this.get('layout'));
+      if (layout.height !== height) {
+        delete layout.bottom;
+        layout.height = height;
+        this.set('layout',layout);
+      }      
+    }
+  }
+});
+
+</code>

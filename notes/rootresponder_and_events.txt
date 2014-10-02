@@ -1,0 +1,2 @@
+In order to catch all events on the page, the root responder hooks itself on the document.
+https://github.com/sproutcore/sproutcore/blob/master/frameworks/core_foundation/system/root_responder.js#L632

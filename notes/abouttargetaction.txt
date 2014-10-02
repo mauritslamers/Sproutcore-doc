@@ -1,0 +1,16 @@
+<code>
+geapi: question, not discussion related *Can I pass a parameter to a target when I set target and action?*
+erichocean: geapi: the sender is passed
+[18:09] geapi: erichocean: the whole object?
+[18:09] erichocean: so you can grab additional data from it
+[18:09] erichocean: yep
+[18:10] erichocean: myAction: function(sender) { var someParam = sender.get('someParam') }
+[18:10] erichocean: (just like Cocoa, BTW)
+[18:11] erichocean: incidentally, this is one reason why your core object only implements forwarding functions
+[18:11] erichocean: and the *real* API is in your model layer
+[18:11] erichocean: you get the action signal from your view, gather params on your Core object, and then call into the model layer API action (usually named similarly) with the necessary parms
+[18:12] Avi` left the chat room. ("Leaving...")
+[18:12] erichocean: this keeps the views and the model layer generic and reusable in different apps
+[18:12] • mauritslamers is saving another piece of valuable information 
+[18:14] rklancer: erichocean: if you define API methods on your model objects, not controllers, do you do:
+</code>

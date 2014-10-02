@@ -1,1 +1,3 @@
 ====== Learning SC ======
+
+Sproutcore contains a lot of concepts borrowed from different sources. This can make understanding what happens or what to do sometimes a bit complicated. We will try to guide you through some basic elements you need to know in order to get things working quickly.

@@ -1,20 +1,23 @@
 ====== Concepts used inside the SproutCore framework ======
 
-===== SproutCores Object Oriented System =====
-
-Javascript is an Object Oriented language, but doesn't follow the class and instance pattern used in many other object oriented languages and environments. SproutCore wraps the Javascript system to build a class and instance pattern. [[concepts:sproutcore:objectoriented | More...]]
-
 ===== MVC: Model-View-Controller =====
 
-SproutCore is an implementation of the Model-View-Controller development paradigm. In implementing this paradigm, the framework follows the implementation model as used in Cocoa/NeXTStep. Two concepts are of major importance in this model: the inheritance model and the observer/binding pattern.
+SproutCore is an implementation of the Model-View-Controller development paradigm. In implementing this paradigm, the framework follows the implementation model as used in Cocoa/NeXTStep. Two concepts are of major importance in this model: the Object Oriented inheritance model and the observer/binding pattern.
 
-==== Inheritance model ====
+==== SproutCores Object Oriented System ====
 
-Cocoa is an Object Oriented MVC implementation, in which all objects inherit from a single base object. This base object defines standard behaviour and properties that should be shared by every object in the framework. SproutCore shares this implementation model. [[inheritance| More... ]]
+Javascript is an Object Oriented language, but doesn't follow the class and instance pattern used in many other object oriented languages and environments. SproutCore wraps the Javascript system to build a class and instance pattern resembling the Cocoa implementation.\\
+Cocoa is an Object Oriented MVC implementation, in which all objects inherit from a single base object. This base object defines standard behaviour and properties that should be shared by every object in the framework. SproutCore shares this implementation model. 
+
+This part also discusses the inheritance functions, such as extend, create and sc_super. [[concepts:sproutcore:objectoriented:start| More...]]
 
 ==== Roles of Model, View and Controller ====
 
 In Cocoa the roles of Models, Views and Controllers can deviate from what you are expecting, in the sense that the divisions are quite strict. [[mvcroles| More... ]]
+
+==== Mixins ====
+
+In Object Oriented systems multiple inheritance is desired, but often difficult because of the propagation of changes through all classes. To prevent having to deal with these multiple origin changes, the Mixin concept is used. [[concepts:sproutcore:objectoriented:mixins| More ...]] 
 
 ===== Observer/binding pattern =====
 
@@ -34,9 +37,10 @@ Observers are a special type of functions. These functions are executed whenever
 
 In order to make bindings and observers work inside JavaScript, SproutCore uses get and set functions. [[getterssetters| More...]] 
 
-===== Mixins =====
+==== Paths ====
 
-In Object Oriented systems multiple inheritance is desired, but often difficult because of the propagation of changes through all classes. To prevent having to deal with these multiple origin changes, the Mixin concept is used. [[mixins| More ...]] 
+In bindings and observers strings with object paths are used to get access to a certain object or property. There are a few very good reasons why these object paths are essential. [[concepts:sproutcore:paths | More...]]
+
 
 ===== RunLoop =====
 
